@@ -3,7 +3,7 @@
 $menus = array();
 
 $tmp = array(
-	'siginvest' => array(
+	'SigInvest' => array(
 		'description' => 'siginvest_menu_desc',
 		'action' => array(
 			'controller' => 'index',

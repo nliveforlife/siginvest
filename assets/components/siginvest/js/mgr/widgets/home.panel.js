@@ -20,16 +20,52 @@ siginvest.panel.Home = function (config) {
 			border: true,
 			hideMode: 'offsets',
 			items: [{
-				title: _('siginvest_items'),
+				title: _('siginvest_projects'),
 				layout: 'anchor',
 				items: [{
-					html: _('siginvest_intro_msg'),
+					html: _('siginvest_intro_projects'),
 					cls: 'panel-desc',
 				}, {
 					xtype: 'siginvest-grid-items',
 					cls: 'main-wrapper',
 				}]
-			}]
+			},
+				{
+					title: _('siginvest_investors'),
+					layout: 'anchor',
+					items: [{
+						html: _('siginvest_intro_investors'),
+						cls: 'panel-desc',
+					}, {
+						xtype: 'siginvest-grid-investors',
+						cls: 'main-wrapper',
+					}]
+				},
+                {
+                    title: _('siginvest_partners'),
+                    layout: 'anchor',
+                    items: [{
+                        html: _('siginvest_intro_partners'),
+                        cls: 'panel-desc',
+                    }, {
+                        xtype: 'siginvest-grid-items',
+                        cls: 'main-wrapper',
+                    }]
+                },
+                {
+                    title: _('siginvest_dividends'),
+                    layout: 'anchor',
+                    items: [{
+                        html: _('siginvest_intro_dividends'),
+                        cls: 'panel-desc',
+                    }, {
+                        xtype: 'siginvest-grid-items',
+                        cls: 'main-wrapper',
+                    }]
+                },
+                
+                
+			]
 		}]
 	});
 	siginvest.panel.Home.superclass.constructor.call(this, config);
