@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model package="siginvest" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" phpdoc-package="siginvest" version="1.1">
+
+	<object class="siginvestProject" table="sig_Projects" extends="xPDOSimpleObject">
+		<field key="project_id" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="true" default="0" />
+		<field key="name" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+		<field key="status" dbtype="varchar" precision="30" phptype="string" null="false" default="atcheck" />
+		<field key="can_sell_parts" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="true" default="1" />
+		<field key="parts_made" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="false" default="1000" />
+		<field key="current_part_price" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="false" default="10" />
+		<field key="need_to_gather" dbtype="integer" precision="20" attributes="unsigned" phptype="integer" null="false" default="10000" />
+		<field key="parts_sold" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="true" default="0" />
+		<field key="parts_left" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="true" default="0" />
+		<field key="project_invrs_count" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="true" default="0" />
+
+		<index alias="status" name="status" primary="false" unique="false" type="BTREE">
+			<column key="status" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+
+	<object class="sigInvestor" table="sig_Investors" extends="xPDOSimpleObject">
+		<field key="user_id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" default="0" />
+		<field key="email" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+		<field key="order_id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" default="0" />
+		<field key="part_id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" default="0" />
+		<field key="project_id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" default="0" />
+		<field key="payment_method" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" default="0" />
+		<field key="order_time" dbtype="timestamp" phptype="timestamp" null="false" default="CURRENT_TIMESTAMP" />
+		<field key="order_status" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+
+		<index alias="key" name="key" primary="false" unique="true" type="BTREE">
+			<column key="user_id" length="" collation="A" null="false" />
+			<column key="email" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	<object class="sigPartner" table="sig_Partners" extends="xPDOSimpleObject">
+		<field key="user_id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" default="0" />
+		<field key="email" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+		<field key="partner_project_id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" default="0" />
+
+		<index alias="key" name="key" primary="false" unique="true" type="BTREE">
+			<column key="user_id" length="" collation="A" null="false" />
+			<column key="email" length="" collation="A" null="false" />
+		</index>
+
+	</object>
+
+</model>
