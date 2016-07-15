@@ -2,6 +2,7 @@
 include_once 'setting.inc.php';
 
 $_lang['siginvest'] = 'SigInvest';
+
 $_lang['siginvest_menu_desc'] = 'Пример расширения для разработки.';
 $_lang['siginvest_intro_msg'] = 'Вы можете выделять сразу несколько предметов при помощи Shift или Ctrl.';
 $_lang['siginvest_intro_investors'] = 'Список всех инвесторов.';
@@ -12,6 +13,7 @@ $_lang['siginvest_intro_dividends'] = 'Список всех дивидендо�
 $_lang['siginvest_items'] = 'Предметы';
 
 $_lang['siginvest_projects'] = 'Проекты';
+$_lang['siginvest_project_btn_create'] = 'Создать Инвестиционный Проект';
 $_lang['siginvest_project_id'] = 'Id';
 $_lang['siginvest_project_name'] = 'Название';
 $_lang['siginvest_project_description'] = 'Описание';
@@ -58,3 +60,9 @@ $_lang['siginvest_item_err_save'] = 'Ошибка при сохранении П
 
 $_lang['siginvest_grid_search'] = 'Поиск';
 $_lang['siginvest_grid_actions'] = 'Действия';
+
+$_lang['siginvest_username'] = 'Логин пользователя';
+$_lang['siginvest_user_id'] = 'ID';
+$_lang['siginvest_user_email'] = 'E-mail';
+$_lang['siginvest_user_active'] = 'Активный';
+$_lang['siginvest_user_actions'] = 'Действия';

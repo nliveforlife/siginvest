@@ -7,7 +7,12 @@ siginvest.grid.Projects = function (config) {
         url: siginvest.config.connector_url,
         fields: this.getFields(config),
         columns: this.getColumns(config),
-        tbar: this.getTopBar(config),
+   //     tbar: this.getTopBar(config),
+        tbar: [{
+            text: _('siginvest_project_btn_create')
+            ,handler: this.createProject
+            ,scope: this
+        }],
         sm: new Ext.grid.CheckboxSelectionModel(),
         baseParams: {
             action: 'mgr/projects/getlist'
@@ -57,7 +62,7 @@ Ext.extend(siginvest.grid.Projects, MODx.grid.Grid, {
 
     createProject: function (btn, e) {
         var w = MODx.load({
-            xtype: 'siginvest-projects-window-create',
+            xtype: 'siginvest-item-window-create',
             id: Ext.id(),
             listeners: {
                 success: {

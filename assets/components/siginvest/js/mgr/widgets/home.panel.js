@@ -48,7 +48,7 @@ siginvest.panel.Home = function (config) {
                         html: _('siginvest_intro_partners'),
                         cls: 'panel-desc',
                     }, {
-                        xtype: 'siginvest-grid-items',
+                        xtype: 'siginvest-grid-partners',
                         cls: 'main-wrapper',
                     }]
                 },
