@@ -10,7 +10,25 @@ $_lang['siginvest_intro_projects'] = 'Список всех проектов.';
 $_lang['siginvest_intro_dividends'] = 'Список всех дивидендов.';
 
 $_lang['siginvest_items'] = 'Предметы';
+
 $_lang['siginvest_projects'] = 'Проекты';
+$_lang['siginvest_project_id'] = 'Id';
+$_lang['siginvest_project_name'] = 'Название';
+$_lang['siginvest_project_description'] = 'Описание';
+$_lang['siginvest_project_active'] = 'Активно';
+$_lang['siginvest_project_create'] = 'Создать Проект';
+$_lang['siginvest_project_update'] = 'Изменить Проект';
+$_lang['siginvest_project_enable'] = 'Включить Проект';
+$_lang['siginvest_projects_enable'] = 'Включить Проекты';
+$_lang['siginvest_project_disable'] = 'Отключить Проект';
+$_lang['siginvest_projects_disable'] = 'Отключить Проекты';
+$_lang['siginvest_project_remove'] = 'Удалить Проект';
+$_lang['siginvest_projects_remove'] = 'Удалить Проекты';
+$_lang['siginvest_project_remove_confirm'] = 'Вы уверены, что хотите удалить этот Проект?';
+$_lang['siginvest_projects_remove_confirm'] = 'Вы уверены, что хотите удалить эти Проекты?';
+$_lang['siginvest_project_active'] = 'Включено';
+
+
 $_lang['siginvest_investors'] = 'Инвесторы';
 $_lang['siginvest_partners'] = 'Партнеры';
 $_lang['siginvest_dividends'] = 'Дивиденды';

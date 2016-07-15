@@ -33,7 +33,10 @@ class siginvestHomeManagerController extends siginvestMainController {
 		$this->addJavascript($this->siginvest->config['jsUrl'] . 'mgr/misc/utils.js');
 		$this->addJavascript($this->siginvest->config['jsUrl'] . 'mgr/widgets/items.grid.js');
 		
+		$this->addJavascript($this->siginvest->config['jsUrl'] . 'mgr/widgets/projects.grid.js');
 		$this->addJavascript($this->siginvest->config['jsUrl'] . 'mgr/widgets/investors.grid.js');
+		$this->addJavascript($this->siginvest->config['jsUrl'] . 'mgr/widgets/partners.grid.js');
+		$this->addJavascript($this->siginvest->config['jsUrl'] . 'mgr/widgets/dividends.grid.js');
 
 		$this->addJavascript($this->siginvest->config['jsUrl'] . 'mgr/widgets/items.windows.js');
 		$this->addJavascript($this->siginvest->config['jsUrl'] . 'mgr/widgets/home.panel.js');
