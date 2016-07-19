@@ -1,11 +1,12 @@
 <?php
 
 /**
- * Update an Item
+ * Update an Project
  */
-class siginvestItemUpdateProcessor extends modObjectUpdateProcessor {
-	public $objectType = 'siginvestItem';
-	public $classKey = 'siginvestItem';
+// class siginvestItemUpdateProcessor extends modObjectUpdateProcessor {
+class siginvestProjectUpdateProcessor extends modObjectUpdateProcessor {
+	public $objectType = 'siginvestProject';
+	public $classKey = 'siginvestProject';
 	public $languageTopics = array('siginvest');
 	//public $permission = 'save';
 
@@ -46,4 +47,4 @@ class siginvestItemUpdateProcessor extends modObjectUpdateProcessor {
 	}
 }
 
-return 'siginvestItemUpdateProcessor';
+return 'siginvestProjectUpdateProcessor';

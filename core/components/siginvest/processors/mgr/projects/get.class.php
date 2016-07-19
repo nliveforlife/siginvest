@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Get an Item
+ * Get an Project
  */
-class siginvestItemGetProcessor extends modObjectGetProcessor {
-	public $objectType = 'siginvestItem';
-	public $classKey = 'siginvestItem';
+class siginvestProjectGetProcessor extends modObjectGetProcessor {
+	public $objectType = 'siginvestProject';
+	public $classKey = 'siginvestProject';
 	public $languageTopics = array('siginvest:default');
-	//public $permission = 'view';
+	public $permission = 'view';
 
 
 	/**
@@ -26,4 +26,4 @@ class siginvestItemGetProcessor extends modObjectGetProcessor {
 
 }
 
-return 'siginvestItemGetProcessor';
+return 'siginvestProjectGetProcessor';

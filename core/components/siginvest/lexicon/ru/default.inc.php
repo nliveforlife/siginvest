@@ -29,11 +29,38 @@ $_lang['siginvest_projects_remove'] = 'Удалить Проекты';
 $_lang['siginvest_project_remove_confirm'] = 'Вы уверены, что хотите удалить этот Проект?';
 $_lang['siginvest_projects_remove_confirm'] = 'Вы уверены, что хотите удалить эти Проекты?';
 $_lang['siginvest_project_active'] = 'Включено';
+$_lang['siginvest_project_err_name'] = 'Вы должны указать имя Проекты.';
+$_lang['siginvest_project_err_ae'] = 'Проект с таким именем уже существует.';
+$_lang['siginvest_project_err_nf'] = 'Проект не найден.';
+$_lang['siginvest_project_err_ns'] = 'Проект не указан.';
+$_lang['siginvest_project_err_remove'] = 'Ошибка при удалении Проекта.';
+$_lang['siginvest_project_err_save'] = 'Ошибка при сохранении Проекта.';
+
+
 
 
 $_lang['siginvest_investors'] = 'Инвесторы';
 $_lang['siginvest_partners'] = 'Партнеры';
+
 $_lang['siginvest_dividends'] = 'Дивиденды';
+$_lang['siginvest_dividend_btn_create'] = 'Создать Выплату дивидендов';
+$_lang['siginvest_dividend_id'] = 'Id';
+$_lang['siginvest_dividend_name'] = 'Название';
+$_lang['siginvest_dividend_description'] = 'Описание';
+$_lang['siginvest_dividend_active'] = 'Активно';
+$_lang['siginvest_dividend_create'] = 'Создать дививенд';
+$_lang['siginvest_dividend_update'] = 'Изменить дививенд';
+$_lang['siginvest_dividend_enable'] = 'Включить дививенд';
+$_lang['siginvest_dividends_enable'] = 'Включить дививенды';
+$_lang['siginvest_dividend_disable'] = 'Отключить дививенд';
+$_lang['siginvest_dividends_disable'] = 'Отключить дививенды';
+$_lang['siginvest_dividend_remove'] = 'Удалить дививенд';
+$_lang['siginvest_dividends_remove'] = 'Удалить дививенды';
+$_lang['siginvest_dividend_remove_confirm'] = 'Вы уверены, что хотите удалить этот дививенд?';
+$_lang['siginvest_dividends_remove_confirm'] = 'Вы уверены, что хотите удалить эти дививенды?';
+$_lang['siginvest_dividend_active'] = 'Включено';
+
+
 $_lang['siginvest_item_id'] = 'Id';
 $_lang['siginvest_item_name'] = 'Название';
 $_lang['siginvest_item_description'] = 'Описание';

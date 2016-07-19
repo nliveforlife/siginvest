@@ -62,7 +62,7 @@ Ext.extend(siginvest.grid.Projects, MODx.grid.Grid, {
 
     createProject: function (btn, e) {
         var w = MODx.load({
-            xtype: 'siginvest-item-window-create',
+            xtype: 'siginvest-project-window-create',
             id: Ext.id(),
             listeners: {
                 success: {
@@ -96,7 +96,7 @@ Ext.extend(siginvest.grid.Projects, MODx.grid.Grid, {
                 success: {
                     fn: function (r) {
                         var w = MODx.load({
-                            xtype: 'siginvest-projects-window-update',
+                            xtype: 'siginvest-project-window-update',
                             id: Ext.id(),
                             record: r,
                             listeners: {

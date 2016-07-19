@@ -59,7 +59,7 @@ siginvest.panel.Home = function (config) {
                         html: _('siginvest_intro_dividends'),
                         cls: 'panel-desc',
                     }, {
-                        xtype: 'siginvest-grid-items',
+                        xtype: 'siginvest-grid-dividends',
                         cls: 'main-wrapper',
                     }]
                 },

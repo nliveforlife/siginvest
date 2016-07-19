@@ -1,14 +1,15 @@
 <?php
 
 /**
- * Get a list of Items
+ * Get a list of Projects
  */
-class siginvestItemGetListProcessor extends modObjectGetListProcessor {
-	public $objectType = 'siginvestItem';
-	public $classKey = 'siginvestItem';
+class siginvestProjectGetListProcessor extends modObjectGetListProcessor {
+	public $objectType = 'siginvestProject';
+	public $classKey = 'siginvestProject';
 	public $defaultSortField = 'id';
 	public $defaultSortDirection = 'DESC';
 	//public $permission = 'list';
+	public $renderers = '';
 
 
 	/**
@@ -103,4 +104,4 @@ class siginvestItemGetListProcessor extends modObjectGetListProcessor {
 
 }
 
-return 'siginvestItemGetListProcessor';
+return 'siginvestProjectGetListProcessor';
