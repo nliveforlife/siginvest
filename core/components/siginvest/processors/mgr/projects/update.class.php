@@ -3,12 +3,12 @@
 /**
  * Update an Project
  */
-// class siginvestItemUpdateProcessor extends modObjectUpdateProcessor {
+// class siginvestProjectUpdateProcessor extends modObjectUpdateProcessor {
 class siginvestProjectUpdateProcessor extends modObjectUpdateProcessor {
 	public $objectType = 'siginvestProject';
 	public $classKey = 'siginvestProject';
 	public $languageTopics = array('siginvest');
-	//public $permission = 'save';
+	public $permission = 'save';
 
 
 	/**

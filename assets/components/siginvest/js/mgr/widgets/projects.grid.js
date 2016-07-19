@@ -1,301 +1,494 @@
-siginvest.grid.Projects = function (config) {
-    config = config || {};
-    if (!config.id) {
-        config.id = 'siginvest-grid-projects';
-    }
-    Ext.applyIf(config, {
-        url: siginvest.config.connector_url,
-        fields: this.getFields(config),
-        columns: this.getColumns(config),
-   //     tbar: this.getTopBar(config),
-        tbar: [{
-            text: _('siginvest_project_btn_create')
-            ,handler: this.createProject
-            ,scope: this
-        }],
-        sm: new Ext.grid.CheckboxSelectionModel(),
-        baseParams: {
-            action: 'mgr/projects/getlist'
-        },
-        listeners: {
-            rowDblClick: function (grid, rowIndex, e) {
-                var row = grid.store.getAt(rowIndex);
-                this.updateProject(grid, e, row);
+siginvest.grid.Projects = function(config) {
+        config = config || {};
+        this.sm = new Ext.grid.CheckboxSelectionModel();
+
+        Ext.applyIf(config,{
+            id: 'siginvest-grid-projects'
+            ,url: siginvest.config.connector_url
+            ,baseParams: {
+                action: 'mgr/projects/getlist'
             }
-        },
-        viewConfig: {
-            forceFit: true,
-            enableRowBody: true,
-            autoFill: true,
-            showPreview: true,
-            scrollOffset: 0,
-            getRowClass: function (rec, ri, p) {
-                return !rec.data.active
-                    ? 'siginvest-grid-row-disabled'
-                    : '';
+            ,fields: ['id','name','status','parts_made','parts_sold','need_to_gather'
+                ,'project_invrs_count','current_part_price','actions']
+            ,autoHeight: true
+            ,paging: true
+            ,remoteSort: true
+            ,sm: this.sm
+            ,columns: [
+                {header: _('siginvest_project_id'), sortable: true, dataIndex: 'id',width: 30}
+                ,{header: _('siginvest_project_name'), sortable: true, dataIndex: 'name',width: 100}
+                ,{header: _('siginvest_project_status'), sortable: true, dataIndex: 'status',width: 50}
+                ,{header: _('siginvest_project_parts_made'), sortable: true, dataIndex: 'parts_made',width: 50}
+                ,{header: _('siginvest_project_parts_sold'), sortable: true, dataIndex: 'parts_sold',width: 50}
+                ,{header: _('siginvest_project_needto_gather'), sortable: true, dataIndex: 'need_to_gather',width: 50}
+                ,{header: _('siginvest_project_invrs_count'), sortable: true, dataIndex: 'project_invrs_count',width: 50}
+                ,{header: _('siginvest_project_current_part_price'), sortable: true, dataIndex: 'current_part_price',width: 50}
+                ,{header: _('siginvest_project_actions'), dataIndex: 'actions',width: 75,renderer: siginvest.utils.renderActions, id: 'actions'}
+            ]
+            ,tbar: [{
+                text: '<i class="' + (MODx.modx23 ? 'icon icon-plus' : 'fa fa-plus') + '"></i> ' + _('siginvest_project_btn_create')
+                ,handler: this.createProject
+                ,scope: this
+            }]
+            ,viewConfig: {
+                forceFit: true
+                ,enableRowBody: true
+                ,autoFill: true
+                ,showPreview: true
+                ,scrollOffset: 0
+                ,getRowClass : function(rec, ri, p) {
+                    if (!rec.data.active) {
+                        return 'siginvest-row-disabled';
+                    }
+                    return '';
+                }
             }
-        },
-        paging: true,
-        remoteSort: true,
-        autoHeight: true,
-    });
-    siginvest.grid.Projects.superclass.constructor.call(this, config);
-
-    // Clear selection on grid refresh
-    this.store.on('load', function () {
-        if (this._getSelectedIds().length) {
-            this.getSelectionModel().clearSelections();
-        }
-    }, this);
-};
-Ext.extend(siginvest.grid.Projects, MODx.grid.Grid, {
-    windows: {},
-
-    getMenu: function (grid, rowIndex) {
-        var ids = this._getSelectedIds();
-
-        var row = grid.getStore().getAt(rowIndex);
-        var menu = siginvest.utils.getMenu(row.data['actions'], this, ids);
-
-        this.addContextMenuProject(menu);
-    },
-
-    createProject: function (btn, e) {
-        var w = MODx.load({
-            xtype: 'siginvest-project-window-create',
-            id: Ext.id(),
-            listeners: {
-                success: {
-                    fn: function () {
-                        this.refresh();
-                    }, scope: this
+            ,listeners: {
+                rowDblClick: function(grid, rowIndex, e) {
+                    var row = grid.store.getAt(rowIndex);
+                    this.updateProject(grid, e, row);
                 }
             }
         });
-        w.reset();
-        w.setValues({active: true});
-        w.show(e.target);
-    },
+        siginvest.grid.Projects.superclass.constructor.call(this,config);
+    };
 
-    updateProject: function (btn, e, row) {
-        if (typeof(row) != 'undefined') {
-            this.menu.record = row.data;
-        }
-        else if (!this.menu.record) {
-            return false;
-        }
-        var id = this.menu.record.id;
 
-        MODx.Ajax.request({
-            url: this.config.url,
-            params: {
-                action: 'mgr/projects/get',
-                id: id
-            },
-            listeners: {
-                success: {
-                    fn: function (r) {
-                        var w = MODx.load({
-                            xtype: 'siginvest-project-window-update',
-                            id: Ext.id(),
-                            record: r,
-                            listeners: {
-                                success: {
-                                    fn: function () {
-                                        this.refresh();
-                                    }, scope: this
-                                }
+    Ext.extend(siginvest.grid.Projects,MODx.grid.Grid,{
+        windows: {}
+
+        ,getMenu: function(grid, rowIndex) {
+            var row = grid.getStore().getAt(rowIndex);
+            var menu = siginvest.utils.getMenu(row.data.actions, this);
+            this.addContextMenuItem(menu);
+        }
+
+        ,onClick: function(e) {
+            var elem = e.getTarget();
+            if (elem.nodeName == 'BUTTON') {
+                var row = this.getSelectionModel().getSelected();
+                if (typeof(row) != 'undefined') {
+                    var type = elem.getAttribute('type');
+                    if (type == 'menu') {
+                        var ri = this.getStore().find('id', row.id);
+                        return this._showMenu(this, ri, e);
+                    }
+                    else {
+                        this.menu.record = row.data;
+                        return this[type](this, e);
+                    }
+                }
+            }
+            return this.processEvent('click', e);
+        }
+
+        ,_renderBoolean: function(val,cell,row) {
+            return val == '' || val == 0
+                ? '<span style="color:red">' + _('no') + '<span>'
+                : '<span style="color:green">' + _('yes') + '<span>';
+        }
+
+        ,_renderImage: function(val,cell,row) {
+            if (!val) {return '';}
+            else if (val.substr(0,1) != '/') {
+                val = '/' + val;
+            }
+
+            return '<img src="' + val + '" alt="" height="50" />';
+        }
+
+        ,_renderTemplate: function(val,cell,row) {
+            if (!val) {return '';}
+            else if (row.data['templatename']) {
+                val = '<sup>(' + val + ')</sup> ' + row.data['templatename'];
+            }
+            return val;
+        }
+
+        ,createProject: function(btn,e) {
+            if (!this.windows.createProject) {
+                this.windows.createProject = MODx.load({
+                    xtype: 'siginvest-window-project-create'
+                    ,listeners: {
+                        'success': {fn:function() { this.refresh(); },scope:this}
+                    }
+                });
+            }
+            this.windows.createProject.fp.getForm().reset();
+            this.windows.createProject.show(e.target);
+        }
+
+        ,updateProject: function(grid, e, row) {
+            if (typeof(row) != 'undefined') {this.menu.record = row.data;}
+            var id = this.menu.record.id;
+
+            MODx.Ajax.request({
+                url: siginvest.config.connector_url
+                ,params: {
+                    action: 'mgr/projects/get'
+                    ,id: id
+                }
+                ,listeners: {
+                    success: {fn:function(r) {
+                        if (this.windows.updateProject) {
+                            this.windows.updateProject.close();
+                            this.windows.updateProject.destroy();
+                        }
+                        this.windows.updateProject = MODx.load({
+                            xtype: 'siginvest-window-project-update'
+                            ,record: r
+                            ,listeners: {
+                                success: {fn:function() { this.refresh(); },scope:this}
                             }
                         });
-                        w.reset();
-                        w.setValues(r.object);
-                        w.show(e.target);
-                    }, scope: this
+                        this.windows.updateProject.fp.getForm().reset();
+                        this.windows.updateProject.fp.getForm().setValues(r.object);
+                        this.windows.updateProject.show(e.target);
+                    },scope:this}
                 }
+            });
+        }
+
+        ,removeProject: function(grid, e) {
+            var ids = this._getSelectedIds();
+            if (!ids) {return;}
+            siginvest.utils.onAjax(this.getEl());
+
+            MODx.msg.confirm({
+                title: _('siginvest_projects_remove')
+                ,text: _('siginvest_projects_remove_confirm')
+                ,url: this.config.url
+                ,params: {
+                    action: 'mgr/projects/remove'
+                    ,ids: ids.join(',')
+                }
+                ,listeners: {
+                    success: {fn:function(r) { this.refresh(); },scope:this}
+                }
+            });
+        }
+
+        ,disableProject: function(grid, e) {
+            var ids = this._getSelectedIds();
+            if (!ids) {return;}
+            siginvest.utils.onAjax(this.getEl());
+
+            MODx.Ajax.request({
+                url: this.config.url
+                ,params: {
+                    action: 'mgr/projects/disable'
+                    ,ids: ids.join(',')
+                }
+                ,listeners: {
+                    success: {fn:function(r) { this.refresh(); },scope:this}
+                }
+            });
+        }
+
+        ,enableProject: function(grid, e) {
+            var ids = this._getSelectedIds();
+            if (!ids) {return;}
+            siginvest.utils.onAjax(this.getEl());
+
+            MODx.Ajax.request({
+                url: this.config.url
+                ,params: {
+                    action: 'mgr/projects/enable'
+                    ,ids: ids.join(',')
+                }
+                ,listeners: {
+                    success: {fn:function(r) { this.refresh(); },scope:this}
+                }
+            });
+        }
+
+        ,_getSelectedIds: function() {
+            var ids = [];
+            var selected = this.getSelectionModel().getSelections();
+
+            for (var i in selected) {
+                if (!selected.hasOwnProperty(i)) {continue;}
+                ids.push(selected[i]['id']);
             }
+
+            return ids;
+        }
+    });
+    Ext.reg('siginvest-grid-projects',siginvest.grid.Projects);
+
+
+    siginvest.window.CreateProject = function(config) {
+        config = config || {};
+        this.ident = config.ident || 'mecproject'+Ext.id();
+        Ext.applyIf(config,{
+            title: _('siginvest_project_create')
+            ,id: this.ident
+            ,autoHeight: true
+            ,width: 650
+            ,url: siginvest.config.connector_url
+            ,action: 'mgr/projects/create'
+            ,fields: [
+                {xtype: 'textfield',fieldLabel: _('siginvest_project_name'),name: 'name',id: 'siginvest-'+this.ident+'-name',anchor: '100%'}
+                ,{xtype: 'modx-combo-template',fieldLabel: _('siginvest_project_template'),name: 'template',id: 'siginvest-'+this.ident+'-template',anchor: '100%'}
+                ,{
+                    layout:'column'
+                    ,border: false
+                    ,anchor: '100%'
+                    ,items: [{
+                        columnWidth: .5
+                        ,layout: 'form'
+                        ,defaults: { msgTarget: 'under' }
+                        ,border:false
+                        ,style: {margin: '0 10px 0 0'}
+                        ,items: [
+                            {xtype: 'textfield',fieldLabel: _('siginvest_project_email_subject'),name: 'email_subject',id: 'siginvest-'+this.ident+'-email_subject',anchor: '100%'}
+                            ,{xtype: 'textfield',fieldLabel: _('siginvest_project_email_reply'),name: 'email_reply',id: 'siginvest-'+this.ident+'-email_reply',anchor: '100%'}
+                            ,{xtype: 'combo-boolean',fieldLabel: _('siginvest_project_active'),name: 'active',hiddenName: 'active',id: 'siginvest-'+this.ident+'-active',anchor: '50%'}
+                        ]
+                    },{
+                        columnWidth: .5
+                        ,layout: 'form'
+                        ,defaults: { msgTarget: 'under' }
+                        ,border:false
+                        ,style: {margin: 0}
+                        ,items: [
+                            {xtype: 'textfield',fieldLabel: _('siginvest_project_email_from'),name: 'email_from',id: 'siginvest-'+this.ident+'-email_from',anchor: '100%'}
+                            ,{xtype: 'textfield',fieldLabel: _('siginvest_project_email_from_name'),name: 'email_from_name',id: 'siginvest-'+this.ident+'-email_from_name',anchor: '100%'}
+                            ,{xtype: 'modx-combo-browser',fieldLabel: _('siginvest_project_image'),name: 'image',id: 'siginvest-'+this.ident+'-image',anchor: '100%'}
+                        ]
+                    }]
+                }
+                ,{xtype: 'textarea',fieldLabel: _('siginvest_project_description'),name: 'description',id: 'siginvest-'+this.ident+'-description',height: 75,anchor: '100%'}
+            ]
+            ,keys: [{key: Ext.EventObject.ENTER,shift: true,fn: function() {this.submit() },scope: this}]
         });
-    },
+        siginvest.window.CreateProject.superclass.constructor.call(this,config);
+    };
+    Ext.extend(siginvest.window.CreateProject,MODx.Window);
+    Ext.reg('siginvest-window-project-create',siginvest.window.CreateProject);
 
-    removeProject: function (act, btn, e) {
-        var ids = this._getSelectedIds();
-        if (!ids.length) {
-            return false;
-        }
-        MODx.msg.confirm({
-            title: ids.length > 1
-                ? _('siginvest_projects_remove')
-                : _('siginvest_project_remove'),
-            text: ids.length > 1
-                ? _('siginvest_projects_remove_confirm')
-                : _('siginvest_project_remove_confirm'),
-            url: this.config.url,
-            params: {
-                action: 'mgr/projects/remove',
-                ids: Ext.util.JSON.encode(ids),
-            },
-            listeners: {
-                success: {
-                    fn: function (r) {
-                        this.refresh();
-                    }, scope: this
-                }
+
+    siginvest.window.UpdateProject = function(config) {
+        config = config || {};
+        this.ident = config.ident || 'meuproject'+Ext.id();
+        Ext.applyIf(config,{
+            title: _('siginvest_project_update')
+            ,id: this.ident
+            ,autoHeight: true
+            ,width: 650
+            ,url: siginvest.config.connector_url
+            ,action: 'mgr/projects/update'
+            ,fields: {
+                xtype: 'modx-tabs'
+                ,stateful: true
+                ,stateId: 'siginvest-window-project-update'
+                ,stateEvents: ['tabchange']
+                ,getState:function() {return {activeTab:this.items.indexOf(this.getActiveTab())};}
+                ,deferredRender: false
+                ,border: true
+                ,items: [{
+                    title: _('siginvest_project')
+                    ,hideMode: 'offsets'
+                    ,layout: 'form'
+                    ,border: true
+                    ,cls: MODx.modx23 ? '' : 'main-wrapper'
+                    ,items: [
+                        {xtype: 'hidden',name: 'id',id: 'siginvest-'+this.ident+'-id'}
+                        ,{xtype: 'textfield',fieldLabel: _('siginvest_project_name'),name: 'name',id: 'siginvest-'+this.ident+'-name',anchor: '100%'}
+                        ,{xtype: 'modx-combo-template',editable:true,fieldLabel: _('siginvest_project_template'),name: 'template',id: 'siginvest-'+this.ident+'-template',anchor: '100%'}
+                        ,{
+                            layout:'column'
+                            ,border: false
+                            ,anchor: '100%'
+                            ,items: [{
+                                columnWidth: .5
+                                ,layout: 'form'
+                                ,defaults: { msgTarget: 'under' }
+                                ,border:false
+                                ,style: {margin: '0 10px 0 0'}
+                                ,items: [
+                                    {xtype: 'textfield',fieldLabel: _('siginvest_project_email_subject'),name: 'email_subject',id: 'siginvest-'+this.ident+'-email_subject',anchor: '100%'}
+                                    ,{xtype: 'textfield',fieldLabel: _('siginvest_project_email_reply'),name: 'email_reply',id: 'siginvest-'+this.ident+'-email_reply',anchor: '100%'}
+                                    ,{xtype: 'combo-boolean',fieldLabel: _('siginvest_project_active'),name: 'active',hiddenName: 'active',id: 'siginvest-'+this.ident+'-active',anchor: '50%'}
+                                ]
+                            },{
+                                columnWidth: .5
+                                ,layout: 'form'
+                                ,defaults: { msgTarget: 'under' }
+                                ,border:false
+                                ,style: {margin: 0}
+                                ,items: [
+                                    {xtype: 'textfield',fieldLabel: _('siginvest_project_email_from'),name: 'email_from',id: 'siginvest-'+this.ident+'-email_from',anchor: '100%'}
+                                    ,{xtype: 'textfield',fieldLabel: _('siginvest_project_email_from_name'),name: 'email_from_name',id: 'siginvest-'+this.ident+'-email_from_name',anchor: '100%'}
+                                    ,{xtype: 'modx-combo-browser',fieldLabel: _('siginvest_project_image'),name: 'image',id: 'siginvest-'+this.ident+'-image',anchor: '100%'}
+                                ]
+                            }]
+                        }
+                        ,{xtype: 'textarea',fieldLabel: _('siginvest_project_description'),name: 'description',id: 'siginvest-'+this.ident+'-description',height: 75,anchor: '100%'}
+                    ]
+                },{
+                    title: _('siginvest_subscribers')
+                    ,xtype: 'siginvest-grid-project-subscribers'
+                    ,layout: 'anchor'
+                    ,cls: MODx.modx23 ? '' : 'main-wrapper'
+                    ,record: config.record.object
+                    ,pageSize: 5
+                }]
             }
+            ,keys: [{key: Ext.EventObject.ENTER,shift: true,fn: function() {this.submit() },scope: this}]
         });
-        return true;
-    },
+        siginvest.window.UpdateProject.superclass.constructor.call(this,config);
+    };
+    Ext.extend(siginvest.window.UpdateProject,MODx.Window);
+    Ext.reg('siginvest-window-project-update',siginvest.window.UpdateProject);
 
-    disableProject: function (act, btn, e) {
-        var ids = this._getSelectedIds();
-        if (!ids.length) {
-            return false;
-        }
-        MODx.Ajax.request({
-            url: this.config.url,
-            params: {
-                action: 'mgr/projects/disable',
-                ids: Ext.util.JSON.encode(ids),
-            },
-            listeners: {
-                success: {
-                    fn: function () {
-                        this.refresh();
-                    }, scope: this
+
+/*
+    siginvest.grid.ProjectSubscribers = function(config) {
+        config = config || {};
+        this.sm = new Ext.grid.CheckboxSelectionModel();
+
+        Ext.applyIf(config,{
+            id: 'siginvest-grid-project-subscribers'
+            ,url: siginvest.config.connector_url
+            ,baseParams: {
+                action: 'mgr/projects/subscriber/getlist'
+                ,project_id: config.record.id
+            }
+            ,fields: ['id','username','fullname','email','actions']
+            ,autoHeight: true
+            ,paging: true
+            ,remoteSort: true
+            ,sm: this.sm
+            ,columns: [
+                {header: _('siginvest_subscriber_id'), sortable: true, dataIndex: 'id',width: 50}
+                ,{header: _('siginvest_subscriber_username'), sortable: true, dataIndex: 'username',width: 100}
+                ,{header: _('siginvest_subscriber_fullname'), sortable: true, dataIndex: 'fullname',width: 100}
+                ,{header: _('siginvest_subscriber_email'), sortable: true, dataIndex: 'email',width: 100}
+                ,{header: '', dataIndex: 'actions',width: 50,renderer: siginvest.utils.renderActions, id: 'actions'}
+            ]
+            ,tbar: [{
+                xtype: 'siginvest-combo-user'
+                ,name: 'user_id'
+                ,hiddenName: 'user_id'
+                ,width: 200
+                ,listeners: {
+                    select: {fn: this.addSubscriber, scope: this}
                 }
-            }
-        })
-    },
-
-    enableProject: function (act, btn, e) {
-        var ids = this._getSelectedIds();
-        if (!ids.length) {
-            return false;
-        }
-        MODx.Ajax.request({
-            url: this.config.url,
-            params: {
-                action: 'mgr/projects/enable',
-                ids: Ext.util.JSON.encode(ids),
-            },
-            listeners: {
-                success: {
-                    fn: function () {
-                        this.refresh();
-                    }, scope: this
+            }, '->', {
+                xtype: 'siginvest-combo-group'
+                ,name: 'group_id'
+                ,hiddenName: 'group_id'
+                ,width: 200
+                ,listeners: {
+                    select: {fn: this.addSubscribers, scope: this}
                 }
-            }
-        })
-    },
+            }]
+        });
+        siginvest.grid.ProjectSubscribers.superclass.constructor.call(this,config);
+    };
+    Ext.extend(siginvest.grid.ProjectSubscribers,MODx.grid.Grid, {
 
-    getFields: function (config) {
-        return ['id', 'name', 'description', 'active', 'actions'];
-    },
-
-    getColumns: function (config) {
-        return [{
-            header: _('siginvest_project_id'),
-            dataIndex: 'id',
-            sortable: true,
-            width: 70
-        }, {
-            header: _('siginvest_project_name'),
-            dataIndex: 'name',
-            sortable: true,
-            width: 200,
-        }, {
-            header: _('siginvest_project_description'),
-            dataIndex: 'description',
-            sortable: false,
-            width: 250,
-        }, {
-            header: _('siginvest_project_active'),
-            dataIndex: 'active',
-            renderer: siginvest.utils.renderBoolean,
-            sortable: true,
-            width: 100,
-        }, {
-            header: _('siginvest_grid_actions'),
-            dataIndex: 'actions',
-            renderer: siginvest.utils.renderActions,
-            sortable: false,
-            width: 100,
-            id: 'actions'
-        }];
-    },
-
-    getTopBar: function (config) {
-        return [{
-            text: '<i class="icon icon-plus"></i>&nbsp;' + _('siginvest_project_create'),
-            handler: this.createProject,
-            scope: this
-        }, '->', {
-            xtype: 'textfield',
-            name: 'query',
-            width: 200,
-            id: config.id + '-search-field',
-            emptyText: _('siginvest_grid_search'),
-            listeners: {
-                render: {
-                    fn: function (tf) {
-                        tf.getEl().addKeyListener(Ext.EventObject.ENTER, function () {
-                            this._doSearch(tf);
-                        }, this);
-                    }, scope: this
-                }
-            }
-        }, {
-            xtype: 'button',
-            id: config.id + '-search-clear',
-            text: '<i class="icon icon-times"></i>',
-            listeners: {
-                click: {fn: this._clearSearch, scope: this}
-            }
-        }];
-    },
-
-    onClick: function (e) {
-        var elem = e.getTarget();
-        if (elem.nodeName == 'BUTTON') {
-            var row = this.getSelectionModel().getSelected();
-            if (typeof(row) != 'undefined') {
-                var action = elem.getAttribute('action');
-                if (action == 'showMenu') {
-                    var ri = this.getStore().find('id', row.id);
-                    return this._showMenu(this, ri, e);
-                }
-                else if (typeof this[action] === 'function') {
-                    this.menu.record = row.data;
-                    return this[action](this, e);
-                }
-            }
-        }
-        return this.processEvent('click', e);
-    },
-
-    _getSelectedIds: function () {
-        var ids = [];
-        var selected = this.getSelectionModel().getSelections();
-
-        for (var i in selected) {
-            if (!selected.hasOwnProperty(i)) {
-                continue;
-            }
-            ids.push(selected[i]['id']);
+        getMenu: function(grid, rowIndex) {
+            var row = grid.getStore().getAt(rowIndex);
+            var menu = siginvest.utils.getMenu(row.data.actions, this);
+            this.addContextMenuItem(menu);
         }
 
-        return ids;
-    },
+        ,onClick: function(e) {
+            var elem = e.getTarget();
+            if (elem.nodeName == 'BUTTON') {
+                var row = this.getSelectionModel().getSelected();
+                if (typeof(row) != 'undefined') {
+                    var type = elem.getAttribute('type');
+                    if (type == 'menu') {
+                        var ri = this.getStore().find('id', row.id);
+                        return this._showMenu(this, ri, e);
+                    }
+                    else {
+                        this.menu.record = row.data;
+                        return this[type](this, e);
+                    }
+                }
+            }
+            return this.processEvent('click', e);
+        }
 
-    _doSearch: function (tf, nv, ov) {
-        this.getStore().baseParams.query = tf.getValue();
-        this.getBottomToolbar().changePage(1);
-        this.refresh();
-    },
+        ,addSubscriber: function(combo, user, e) {
+            combo.reset();
+            siginvest.utils.onAjax(this.getEl());
 
-    _clearSearch: function (btn, e) {
-        this.getStore().baseParams.query = '';
-        Ext.getCmp(this.config.id + '-search-field').setValue('');
-        this.getBottomToolbar().changePage(1);
-        this.refresh();
-    }
-});
-Ext.reg('siginvest-grid-projects', siginvest.grid.Projects);
+            MODx.Ajax.request({
+                url: siginvest.config.connector_url
+                ,params: {
+                    action: 'mgr/projects/subscriber/create'
+                    ,user_id: user.id
+                    ,project_id: this.config.record.id
+                }
+                ,listeners: {
+                    success: {fn:function(r) {this.refresh();},scope:this}
+                }
+            });
+        }
+
+        ,addSubscribers: function(combo, group, e) {
+            combo.reset();
+            siginvest.utils.onAjax(this.getEl());
+
+            MODx.Ajax.request({
+                url: siginvest.config.connector_url
+                ,params: {
+                    action: 'mgr/projects/subscriber/add_group'
+                    ,group_id: group.id
+                    ,project_id: this.config.record.id
+                }
+                ,listeners: {
+                    success: {fn:function(r) {this.refresh();},scope:this}
+                }
+            });
+        }
+
+        ,removeSubscriber:function(btn,e) {
+            var ids = this._getSelectedIds();
+            if (!ids) {return;}
+            siginvest.utils.onAjax(this.getEl());
+
+            MODx.msg.confirm({
+                title: _('siginvest_subscribers_remove')
+                ,text: _('siginvest_subscribers_remove_confirm')
+                ,url: siginvest.config.connector_url
+                ,params: {
+                    action: 'mgr/projects/subscriber/remove'
+                    ,ids: ids.join(',')
+                }
+                ,listeners: {
+                    success: {fn:function(r) {this.refresh();},scope:this}
+                }
+            });
+        }
+
+        ,_getSelectedIds: function() {
+            var ids = [];
+            var selected = this.getSelectionModel().getSelections();
+
+            for (var i in selected) {
+                if (!selected.hasOwnProperty(i)) {continue;}
+                ids.push(selected[i]['id']);
+            }
+
+            return ids;
+        }
+
+    });
+    Ext.reg('siginvest-grid-project-subscribers',siginvest.grid.ProjectSubscribers);
+
+*/
+
+
+
+
+
+// Ext.reg('siginvest-grid-projects', siginvest.grid.Projects);
+// Ext.extend(siginvest.grid.Projects, MODx.grid.Grid, {
+//
+//

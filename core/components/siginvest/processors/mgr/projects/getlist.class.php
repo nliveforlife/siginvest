@@ -58,7 +58,7 @@ class siginvestProjectGetListProcessor extends modObjectGetListProcessor {
 		$array['actions'][] = array(
 			'cls' => '',
 			'icon' => 'icon icon-edit',
-			'title' => $this->modx->lexicon('siginvest_item_update'),
+			'title' => $this->modx->lexicon('siginvest_project_update'),
 			//'multiple' => $this->modx->lexicon('siginvest_items_update'),
 			'action' => 'updateItem',
 			'button' => true,
@@ -69,8 +69,8 @@ class siginvestProjectGetListProcessor extends modObjectGetListProcessor {
 			$array['actions'][] = array(
 				'cls' => '',
 				'icon' => 'icon icon-power-off action-green',
-				'title' => $this->modx->lexicon('siginvest_item_enable'),
-				'multiple' => $this->modx->lexicon('siginvest_items_enable'),
+				'title' => $this->modx->lexicon('siginvest_project_enable'),
+				'multiple' => $this->modx->lexicon('siginvest_projects_enable'),
 				'action' => 'enableItem',
 				'button' => true,
 				'menu' => true,
@@ -80,8 +80,8 @@ class siginvestProjectGetListProcessor extends modObjectGetListProcessor {
 			$array['actions'][] = array(
 				'cls' => '',
 				'icon' => 'icon icon-power-off action-gray',
-				'title' => $this->modx->lexicon('siginvest_item_disable'),
-				'multiple' => $this->modx->lexicon('siginvest_items_disable'),
+				'title' => $this->modx->lexicon('siginvest_project_disable'),
+				'multiple' => $this->modx->lexicon('siginvest_projects_disable'),
 				'action' => 'disableItem',
 				'button' => true,
 				'menu' => true,
@@ -92,8 +92,8 @@ class siginvestProjectGetListProcessor extends modObjectGetListProcessor {
 		$array['actions'][] = array(
 			'cls' => '',
 			'icon' => 'icon icon-trash-o action-red',
-			'title' => $this->modx->lexicon('siginvest_item_remove'),
-			'multiple' => $this->modx->lexicon('siginvest_items_remove'),
+			'title' => $this->modx->lexicon('siginvest_project_remove'),
+			'multiple' => $this->modx->lexicon('siginvest_projects_remove'),
 			'action' => 'removeItem',
 			'button' => true,
 			'menu' => true,

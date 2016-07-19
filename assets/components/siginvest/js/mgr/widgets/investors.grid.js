@@ -37,11 +37,14 @@ siginvest.grid.Investors = function (config) {
     siginvest.grid.Investors.superclass.constructor.call(this, config);
 
     // Clear selection on grid refresh
+    /*
     this.store.on('load', function () {
         if (this._getSelectedIds().length) {
             this.getSelectionModel().clearSelections();
         }
     }, this);
+    */
+
 };
 
 Ext.extend(siginvest.grid.Investors, MODx.grid.Grid, {
