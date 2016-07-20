@@ -1,5 +1,4 @@
 siginvest.utils.renderActions = function(value, props, row) {
-    //console.log(row.data);
     var res = [];
     for (var i in row.data.actions) {
         if (!row.data.actions.hasOwnProperty(i)) {continue;}
@@ -9,9 +8,10 @@ siginvest.utils.renderActions = function(value, props, row) {
                 ? a['class']['button']
                 : '';
             cls += ' ' + (MODx.modx23 ? 'icon icon-' : 'fa fa-') + a['icon'];
+
             res.push(
                 '<li>\
-                    <button class="btn btn-default '+ cls +'" type="'+a['type']+'" title="'+_('siginvest_action_'+a['type'])+'"></button>\
+                    <button class="btn btn-default '+ cls +'" type="'+a['type']+'" title="'+_('siginvest_project_'+a['type'])+'"></button>\
 				</li>'
             );
         }
@@ -25,7 +25,7 @@ siginvest.utils.getMenu = function(actions, grid) {
     for (var i in actions) {
         if (!actions.hasOwnProperty(i)) {continue;}
         var a = actions[i];
- //       console.log(a);
+
         if (!a['menu']) {
             if (a == '-') {
                 console.log('pushed');
@@ -35,14 +35,14 @@ siginvest.utils.getMenu = function(actions, grid) {
         else if (menu.length > 0 && /^remove/i.test(a['type'])) {
             menu.push('-');
         }
-        console.log(a['class']);
+
         var cls = typeof(a['class']) == 'object' && a['class']['menu']
             ? a['class']['menu']
             : '';
         cls += ' ' + (MODx.modx23 ? 'icon icon-' : 'fa fa-') + a['icon'];
+        
 
         menu.push({
-         //   text: '<i class="' + cls + ' x-menu-item-icon"></i> ' + _('siginvest_action_' + a['type'])
             text: '<i class="' + cls + ' x-menu-item-icon"></i> ' + _('siginvest_project_' + a['type'])
             ,handler: grid[a['type']]
         });

@@ -57,46 +57,56 @@ class siginvestProjectGetListProcessor extends modObjectGetListProcessor {
 		// Edit
 		$array['actions'][] = array(
 			'cls' => '',
+			'class' => '',
 			'icon' => 'icon icon-edit',
-			'title' => $this->modx->lexicon('siginvest_project_update'),
-			//'multiple' => $this->modx->lexicon('siginvest_items_update'),
+			'title' => $this->modx->lexicon('siginvest_project_updateProject'),
+			//'multiple' => $this->modx->lexicon('siginvest_items_updateProject'),
 			'action' => 'updateProject',
 			'button' => true,
 			'menu' => true,
+			'type' => 'updateProject'
 		);
 
-		if (!$array['active']) {
+		// Enable
+		if (!$array['published']) {
 			$array['actions'][] = array(
+				'class' => '',
 				'cls' => '',
-				'icon' => 'icon icon-power-off action-green',
-				'title' => $this->modx->lexicon('siginvest_project_enable'),
-				'multiple' => $this->modx->lexicon('siginvest_projects_enable'),
+				'icon' => 'icon icon-power-off action-gray',
+				'title' => $this->modx->lexicon('siginvest_project_enableProject'),
+				'multiple' => $this->modx->lexicon('siginvest_projects_enableProject'),
 				'action' => 'enableProject',
 				'button' => true,
 				'menu' => true,
+				'type' => 'enableProject'
 			);
 		}
+		// or Disable
 		else {
 			$array['actions'][] = array(
+				'class' => '',
 				'cls' => '',
-				'icon' => 'icon icon-power-off action-gray',
-				'title' => $this->modx->lexicon('siginvest_project_disable'),
-				'multiple' => $this->modx->lexicon('siginvest_projects_disable'),
+				'icon' => 'check action-green',
+				'title' => $this->modx->lexicon('siginvest_project_disableProject'),
+				'multiple' => $this->modx->lexicon('siginvest_projects_disableProject'),
 				'action' => 'disableProject',
 				'button' => true,
 				'menu' => true,
+				'type' => 'disableProject'
 			);
 		}
 
 		// Remove
 		$array['actions'][] = array(
+			'class' => '',
 			'cls' => '',
 			'icon' => 'icon icon-trash-o action-red',
-			'title' => $this->modx->lexicon('siginvest_project_remove'),
-			'multiple' => $this->modx->lexicon('siginvest_projects_remove'),
+			'title' => $this->modx->lexicon('siginvest_project_removeProject'),
+			'multiple' => $this->modx->lexicon('siginvest_projects_removeProject'),
 			'action' => 'removeProject',
 			'button' => true,
 			'menu' => true,
+			'type' => 'removeProject'
 		);
 
 		return $array;

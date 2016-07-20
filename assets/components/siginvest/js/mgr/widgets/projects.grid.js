@@ -61,8 +61,9 @@ siginvest.grid.Projects = function(config) {
         ,getMenu: function(grid, rowIndex) {
             var row = grid.getStore().getAt(rowIndex);
             var menu = siginvest.utils.getMenu(row.data.actions, this);
-            console.log(row.data.actions);
-            console.log('Тут контекст:',this);
+         //   console.log('grid: ',grid);
+         //   console.log(row.data.actions);
+         //   console.log('Тут контекст:',this);
             this.addContextMenuItem(menu);
         }
 
@@ -122,11 +123,12 @@ siginvest.grid.Projects = function(config) {
         }
 
         ,updateProject: function(grid, e, row) {
-            console.log('Error');
             if (typeof(row) != 'undefined') {this.menu.record = row.data;}
             var id = this.menu.record.id;
 
-            MODx.Ajax.request({
+            MODx.Ajax.request(
+                console.log('Srabotal Ajax-Request'),
+                {
                 url: siginvest.config.connector_url
                 ,params: {
                     action: 'mgr/projects/get'
