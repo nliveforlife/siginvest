@@ -21,9 +21,9 @@ siginvest.grid.Projects = function(config) {
                 ,{header: _('siginvest_project_parts_made'), sortable: true, dataIndex: 'parts_made',width: 40}
                 ,{header: _('siginvest_project_parts_sold'), sortable: true, dataIndex: 'parts_sold',width: 40}
                 ,{header: _('siginvest_project_need_to_gather'), sortable: true, dataIndex: 'need_to_gather',width: 40}
-                ,{header: _('siginvest_project_invrs_count'), sortable: true, dataIndex: 'project_invrs_count',width: 20}
+                ,{header: _('siginvest_project_invrs_count'), sortable: true, dataIndex: 'project_invrs_count',width: 20,hidden: true}
                 ,{header: _('siginvest_project_current_part_price'), sortable: true, dataIndex: 'current_part_price',width: 40}
-                ,{header: _('siginvest_project_published'), sortable: true, dataIndex: 'published',width: 30, renderer: siginvest.utils.renderBoolean}
+                ,{header: _('siginvest_project_published'), sortable: true, dataIndex: 'published',width: 30, renderer: this._renderBoolean}
                 ,{header: _('siginvest_project_actions'), dataIndex: 'actions',width: 75,renderer: siginvest.utils.renderActions, id: 'actions'}
             ]
             ,tbar: [{
@@ -38,10 +38,9 @@ siginvest.grid.Projects = function(config) {
                 ,showPreview: true
                 ,scrollOffset: 0
                 ,getRowClass : function(rec, ri, p) {
-                    if (!rec.data.active) {
-                        return 'siginvest-row-disabled';
-                    }
-                    return '';
+                    return !rec.data.published
+                        ? 'siginvest-grid-row-disabled'
+                        : '';
                 }
             }
             ,listeners: {
@@ -58,9 +57,12 @@ siginvest.grid.Projects = function(config) {
     Ext.extend(siginvest.grid.Projects,MODx.grid.Grid,{
         windows: {}
 
+  //
         ,getMenu: function(grid, rowIndex) {
             var row = grid.getStore().getAt(rowIndex);
             var menu = siginvest.utils.getMenu(row.data.actions, this);
+            console.log(row.data.actions);
+            console.log('Тут контекст:',this);
             this.addContextMenuItem(menu);
         }
 
@@ -120,6 +122,7 @@ siginvest.grid.Projects = function(config) {
         }
 
         ,updateProject: function(grid, e, row) {
+            console.log('Error');
             if (typeof(row) != 'undefined') {this.menu.record = row.data;}
             var id = this.menu.record.id;
 
