@@ -60,7 +60,7 @@ class siginvestProjectGetListProcessor extends modObjectGetListProcessor {
 			'icon' => 'icon icon-edit',
 			'title' => $this->modx->lexicon('siginvest_project_update'),
 			//'multiple' => $this->modx->lexicon('siginvest_items_update'),
-			'action' => 'updateItem',
+			'action' => 'updateProject',
 			'button' => true,
 			'menu' => true,
 		);
@@ -71,7 +71,7 @@ class siginvestProjectGetListProcessor extends modObjectGetListProcessor {
 				'icon' => 'icon icon-power-off action-green',
 				'title' => $this->modx->lexicon('siginvest_project_enable'),
 				'multiple' => $this->modx->lexicon('siginvest_projects_enable'),
-				'action' => 'enableItem',
+				'action' => 'enableProject',
 				'button' => true,
 				'menu' => true,
 			);
@@ -82,7 +82,7 @@ class siginvestProjectGetListProcessor extends modObjectGetListProcessor {
 				'icon' => 'icon icon-power-off action-gray',
 				'title' => $this->modx->lexicon('siginvest_project_disable'),
 				'multiple' => $this->modx->lexicon('siginvest_projects_disable'),
-				'action' => 'disableItem',
+				'action' => 'disableProject',
 				'button' => true,
 				'menu' => true,
 			);
@@ -94,7 +94,7 @@ class siginvestProjectGetListProcessor extends modObjectGetListProcessor {
 			'icon' => 'icon icon-trash-o action-red',
 			'title' => $this->modx->lexicon('siginvest_project_remove'),
 			'multiple' => $this->modx->lexicon('siginvest_projects_remove'),
-			'action' => 'removeItem',
+			'action' => 'removeProject',
 			'button' => true,
 			'menu' => true,
 		);

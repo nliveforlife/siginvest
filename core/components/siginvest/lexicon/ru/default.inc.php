@@ -15,18 +15,20 @@ $_lang['siginvest_items'] = 'Предметы';
 $_lang['siginvest_projects'] = 'Проекты';
 $_lang['siginvest_project_btn_create'] = 'Создать Инвестиционный Проект';
 $_lang['siginvest_project_id'] = 'Id';
-$_lang['siginvest_project_name'] = 'Название';
+$_lang['siginvest_project_name'] = 'Название проекта';
 $_lang['siginvest_project_description'] = 'Описание';
 $_lang['siginvest_project_parts_made'] = 'Всего долей, шт.';
 $_lang['siginvest_project_parts_sold'] = 'Долей продано, шт.';
 $_lang['siginvest_project_parts_left'] = 'Долей осталось, шт.';
-$_lang['siginvest_project_invrs_count'] = 'Кол.инв.';
+$_lang['siginvest_project_invrs_count'] = 'Инвесторов, чел.';
 $_lang['siginvest_project_status'] = 'Статус';
-$_lang['siginvest_project_needto_gather'] = 'Нужно, $';
-$_lang['siginvest_project_ already_got'] = 'Собрано, $';
+$_lang['siginvest_project_need_to_gather'] = 'Нужно собрать, $';
+$_lang['siginvest_project_already_got'] = 'Собрано, $';
 $_lang['siginvest_project_still_need'] = 'Осталось собрать, $';
 $_lang['siginvest_project_current_part_price'] = 'Цена доли, $';
 $_lang['siginvest_project_actions'] = 'Действия';
+$_lang['siginvest_project_image'] = 'Изображение';
+$_lang['siginvest_project_published'] = 'Опубликован';
 
 
 $_lang['siginvest_project_active'] = 'Опубликован';
@@ -40,10 +42,10 @@ $_lang['siginvest_project_remove'] = 'Удалить Проект';
 $_lang['siginvest_projects_remove'] = 'Удалить Проекты';
 $_lang['siginvest_project_remove_confirm'] = 'Вы уверены, что хотите удалить этот Проект?';
 $_lang['siginvest_projects_remove_confirm'] = 'Вы уверены, что хотите удалить эти Проекты?';
+$_lang['siginvest_project_template'] = 'Шаблон страницы проекта';
 
 
 
-siginvest_project_template
 
 $_lang['siginvest_project_err_name'] = 'Вы должны указать имя Проекты.';
 $_lang['siginvest_project_err_ae'] = 'Проект с таким именем уже существует.';

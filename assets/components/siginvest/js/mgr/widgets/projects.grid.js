@@ -9,20 +9,21 @@ siginvest.grid.Projects = function(config) {
                 action: 'mgr/projects/getlist'
             }
             ,fields: ['id','name','status','parts_made','parts_sold','need_to_gather'
-                ,'project_invrs_count','current_part_price','actions']
+                ,'project_invrs_count','current_part_price','published','actions']
             ,autoHeight: true
             ,paging: true
             ,remoteSort: true
             ,sm: this.sm
             ,columns: [
-                {header: _('siginvest_project_id'), sortable: true, dataIndex: 'id',width: 30}
+                {header: _('siginvest_project_id'), sortable: true, dataIndex: 'id',width: 20}
                 ,{header: _('siginvest_project_name'), sortable: true, dataIndex: 'name',width: 100}
-                ,{header: _('siginvest_project_status'), sortable: true, dataIndex: 'status',width: 50}
-                ,{header: _('siginvest_project_parts_made'), sortable: true, dataIndex: 'parts_made',width: 50}
-                ,{header: _('siginvest_project_parts_sold'), sortable: true, dataIndex: 'parts_sold',width: 50}
-                ,{header: _('siginvest_project_needto_gather'), sortable: true, dataIndex: 'need_to_gather',width: 50}
-                ,{header: _('siginvest_project_invrs_count'), sortable: true, dataIndex: 'project_invrs_count',width: 50}
-                ,{header: _('siginvest_project_current_part_price'), sortable: true, dataIndex: 'current_part_price',width: 50}
+                ,{header: _('siginvest_project_status'), sortable: true, dataIndex: 'status',width: 40}
+                ,{header: _('siginvest_project_parts_made'), sortable: true, dataIndex: 'parts_made',width: 40}
+                ,{header: _('siginvest_project_parts_sold'), sortable: true, dataIndex: 'parts_sold',width: 40}
+                ,{header: _('siginvest_project_need_to_gather'), sortable: true, dataIndex: 'need_to_gather',width: 40}
+                ,{header: _('siginvest_project_invrs_count'), sortable: true, dataIndex: 'project_invrs_count',width: 20}
+                ,{header: _('siginvest_project_current_part_price'), sortable: true, dataIndex: 'current_part_price',width: 40}
+                ,{header: _('siginvest_project_published'), sortable: true, dataIndex: 'published',width: 30, renderer: siginvest.utils.renderBoolean}
                 ,{header: _('siginvest_project_actions'), dataIndex: 'actions',width: 75,renderer: siginvest.utils.renderActions, id: 'actions'}
             ]
             ,tbar: [{
@@ -229,23 +230,121 @@ siginvest.grid.Projects = function(config) {
             ,action: 'mgr/projects/create'
             ,fields: [
                 {xtype: 'textfield',fieldLabel: _('siginvest_project_name'),name: 'name',id: 'siginvest-'+this.ident+'-name',anchor: '100%'}
+                ,{xtype: 'textarea',fieldLabel: _('siginvest_project_description'),name: 'description',id: 'siginvest-'+this.ident+'-description',height: 55,anchor: '100%'}
                 ,{xtype: 'modx-combo-template',fieldLabel: _('siginvest_project_template'),name: 'template',id: 'siginvest-'+this.ident+'-template',anchor: '100%'}
+                ,{xtype: 'radiogroup',fieldLabel: _('siginvest_project_status'),name: 'status',id: 'siginvest-'+this.ident+'-status',anchor: '100%',columns: 3,vertical: true
+                    , items: [
+                        {boxLabel: 'На проверке', name: 'rb', inputValue: 'atcheck', checked: true},
+                        {boxLabel: 'Активен', name: 'rb', inputValue: 'active'},
+                        {boxLabel: 'Закрыт', name: 'rb', inputValue: 'closed'}
+                    ]
+                }
                 ,{
-                    layout:'column'
-                    ,border: false
-                    ,anchor: '100%'
-                    ,items: [{
+                    xtype: 'numberfield',
+                    fieldLabel: _('siginvest_project_parts_made'),
+                    name: 'parts_made',
+                    id: 'siginvest-' + this.ident + '-parts_made',
+                    anchor: '100%',
+                    value: 10000,
+                    maxValue: 1000000,
+                    minValue: 100
+                }
+                , {
+                    xtype: 'numberfield',
+                    fieldLabel: _('siginvest_project_need_to_gather'),
+                    name: 'need_to_gather',
+                    id: 'siginvest-' + this.ident + '-need_to_gather',
+                    anchor: '100%',
+                    value: 10000,
+                    maxValue: 1000000,
+                    minValue: 100,
+                    step: 60
+                }
+                , {
+                    xtype: 'numberfield',
+                    fieldLabel: _('siginvest_project_current_part_price'),
+                    name: 'current_part_price',
+                    id: 'siginvest-' + this.ident + '-current_part_price',
+                    anchor: '100%',
+                    value: 10,
+                    maxValue: 1000000,
+                    minValue: 1
+                }
+                , {
+                    xtype: 'combo-boolean',
+                    fieldLabel: _('siginvest_project_active'),
+                    name: 'active',
+                    hiddenName: 'active',
+                    id: 'siginvest-' + this.ident + '-active',
+                    anchor: '50%'
+                }
+                ,{xtype: 'modx-combo-browser',fieldLabel: _('siginvest_project_image'),name: 'image',id: 'siginvest-'+this.ident+'-image',anchor: '50%'}
+
+
+
+                /*
+                *
+                *
+                , {
+                    layout: 'column'
+                    , border: false
+                    , anchor: '100%'
+                    , columns: 4
+                    , items: [{
+                        layout: 'column'
                         columnWidth: .5
-                        ,layout: 'form'
-                        ,defaults: { msgTarget: 'under' }
-                        ,border:false
-                        ,style: {margin: '0 10px 0 0'}
-                        ,items: [
-                            {xtype: 'textfield',fieldLabel: _('siginvest_project_email_subject'),name: 'email_subject',id: 'siginvest-'+this.ident+'-email_subject',anchor: '100%'}
-                            ,{xtype: 'textfield',fieldLabel: _('siginvest_project_email_reply'),name: 'email_reply',id: 'siginvest-'+this.ident+'-email_reply',anchor: '100%'}
-                            ,{xtype: 'combo-boolean',fieldLabel: _('siginvest_project_active'),name: 'active',hiddenName: 'active',id: 'siginvest-'+this.ident+'-active',anchor: '50%'}
+                        //, layout: 'form'
+                        , columns: 4
+                        , defaults: {msgTarget: 'under'}
+                        , border: false
+                        //, style: {margin: '0 10px 0 0'}
+                        , items: [
+                            {
+                                xtype: 'numberfield',
+                                fieldLabel: _('siginvest_project_parts_made'),
+                                name: 'parts_made',
+                                id: 'siginvest-' + this.ident + '-parts_made',
+                                anchor: '100%',
+                                value: 10000,
+                                maxValue: 1000000,
+                                minValue: 100
+                            }
+                            , {
+                                xtype: 'numberfield',
+                                fieldLabel: _('siginvest_project_need_to_gather'),
+                                name: 'need_to_gather',
+                                id: 'siginvest-' + this.ident + '-need_to_gather',
+                                anchor: '100%',
+                                value: 10000,
+                                maxValue: 1000000,
+                                minValue: 100,
+                                step: 60
+                            }
+                            , {
+                                xtype: 'numberfield',
+                                fieldLabel: _('siginvest_project_current_part_price'),
+                                name: 'current_part_price',
+                                id: 'siginvest-' + this.ident + '-current_part_price',
+                                anchor: '100%',
+                                value: 10,
+                                maxValue: 1000000,
+                                minValue: 1
+                            }
+                            , {
+                                xtype: 'combo-boolean',
+                                fieldLabel: _('siginvest_project_active'),
+                                name: 'active',
+                                hiddenName: 'active',
+                                id: 'siginvest-' + this.ident + '-active',
+                                anchor: '50%'
+                            }
                         ]
-                    },{
+                    }]
+                }
+*/
+
+                 /*
+                        {
                         columnWidth: .5
                         ,layout: 'form'
                         ,defaults: { msgTarget: 'under' }
@@ -257,8 +356,8 @@ siginvest.grid.Projects = function(config) {
                             ,{xtype: 'modx-combo-browser',fieldLabel: _('siginvest_project_image'),name: 'image',id: 'siginvest-'+this.ident+'-image',anchor: '100%'}
                         ]
                     }]
-                }
-                ,{xtype: 'textarea',fieldLabel: _('siginvest_project_description'),name: 'description',id: 'siginvest-'+this.ident+'-description',height: 75,anchor: '100%'}
+            */
+
             ]
             ,keys: [{key: Ext.EventObject.ENTER,shift: true,fn: function() {this.submit() },scope: this}]
         });
