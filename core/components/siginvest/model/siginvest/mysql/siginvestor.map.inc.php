@@ -6,10 +6,10 @@ $xpdo_meta_map['sigInvestor']= array (
   'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
+    'part_id' => 0,
     'user_id' => 0,
     'email' => '',
     'order_id' => 0,
-    'part_id' => 0,
     'project_id' => 0,
     'payment_method' => 0,
     'order_time' => 'CURRENT_TIMESTAMP',
@@ -17,6 +17,15 @@ $xpdo_meta_map['sigInvestor']= array (
   ),
   'fieldMeta' => 
   array (
+    'part_id' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '11',
+      'phptype' => 'integer',
+      'attributes' => 'unsigned',
+      'null' => false,
+      'default' => 0,
+    ),
     'user_id' => 
     array (
       'dbtype' => 'int',
@@ -35,15 +44,6 @@ $xpdo_meta_map['sigInvestor']= array (
       'default' => '',
     ),
     'order_id' => 
-    array (
-      'dbtype' => 'int',
-      'precision' => '10',
-      'phptype' => 'integer',
-      'attributes' => 'unsigned',
-      'null' => true,
-      'default' => 0,
-    ),
-    'part_id' => 
     array (
       'dbtype' => 'int',
       'precision' => '10',
@@ -88,21 +88,15 @@ $xpdo_meta_map['sigInvestor']= array (
   ),
   'indexes' => 
   array (
-    'key' => 
+    'user_id' => 
     array (
-      'alias' => 'key',
+      'alias' => 'user_id',
       'primary' => false,
-      'unique' => true,
+      'unique' => false,
       'type' => 'BTREE',
       'columns' => 
       array (
         'user_id' => 
-        array (
-          'length' => '',
-          'collation' => 'A',
-          'null' => false,
-        ),
-        'email' => 
         array (
           'length' => '',
           'collation' => 'A',

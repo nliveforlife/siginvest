@@ -39,29 +39,4 @@ $xpdo_meta_map['sigPartner']= array (
       'default' => 0,
     ),
   ),
-  'indexes' => 
-  array (
-    'key' => 
-    array (
-      'alias' => 'key',
-      'primary' => false,
-      'unique' => true,
-      'type' => 'BTREE',
-      'columns' => 
-      array (
-        'user_id' => 
-        array (
-          'length' => '',
-          'collation' => 'A',
-          'null' => false,
-        ),
-        'email' => 
-        array (
-          'length' => '',
-          'collation' => 'A',
-          'null' => false,
-        ),
-      ),
-    ),
-  ),
 );
