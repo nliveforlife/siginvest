@@ -21,12 +21,10 @@
 
 
 	<object class="sigInvestor" table="sig_Investors" extends="xPDOSimpleObject">
-		<field key="part_id" dbtype="int" precision="11" phptype="integer" attributes="unsigned" null="false"   default="" />
-		<field key="user_id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" default="0" />
-		<field key="email" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+		<field key="part_id" dbtype="varchar" precision="55" phptype="string" null="true"   default="" />
+        <field key="user_id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" default="0" />
 		<field key="order_id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" default="0" />
 		<field key="project_id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" default="" />
-		<field key="payment_method" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" default="0" />
 		<field key="order_time" dbtype="timestamp" phptype="timestamp" null="false" default="CURRENT_TIMESTAMP" />
 		<field key="order_status" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
 
