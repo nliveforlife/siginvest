@@ -17,6 +17,7 @@
         <field key="dev_persent_to_inv" dbtype="integer" precision="5" attributes="unsigned" phptype="integer" null="false" default="50" />
         <field key="dev_term" dbtype="integer" precision="5" attributes="unsigned" phptype="integer" null="false" default="3" />
         <field key="dev_buyback"  dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="true" default="0" />
+
         <field key="dev_paid_count" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="true" default="0" />
         <field key="dev_paid_vsego" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="true" default="0" />
 

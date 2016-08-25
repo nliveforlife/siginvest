@@ -16,6 +16,7 @@ class siginvestProjectGetProcessor extends modObjectGetProcessor {
 	 *
 	 * @return mixed
 	 */
+	/*
 	public function process() {
 		if (!$this->checkPermissions()) {
 			return $this->failure($this->modx->lexicon('access_denied'));
@@ -23,7 +24,7 @@ class siginvestProjectGetProcessor extends modObjectGetProcessor {
 
 		return parent::process();
 	}
-
+*/
 }
 
 return 'siginvestProjectGetProcessor';

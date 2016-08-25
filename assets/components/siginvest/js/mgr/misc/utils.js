@@ -151,5 +151,4 @@ siginvest.utils.renderActions = function (value, props, row) {
 	);
 };
 
-
 */

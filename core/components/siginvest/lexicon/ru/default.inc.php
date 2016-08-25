@@ -14,7 +14,8 @@ $_lang['siginvest_items'] = 'Предметы';
 
 $_lang['siginvest_projects'] = 'Проекты';
 $_lang['siginvest_project_btn_create'] = 'Создать Инвестиционный Проект';
-$_lang['siginvest_project_id'] = 'Id';
+$_lang['siginvest_project_id'] = 'Id страницы проекта';
+$_lang['siginvest_id'] = "ID";
 $_lang['siginvest_project_name'] = 'Название проекта';
 $_lang['siginvest_project_description'] = 'Описание';
 $_lang['siginvest_project_parts_made'] = 'Всего долей, шт.';
@@ -29,6 +30,14 @@ $_lang['siginvest_project_current_part_price'] = 'Цена доли, $';
 $_lang['siginvest_project_actions'] = 'Действия';
 $_lang['siginvest_project_image'] = 'Изображение';
 $_lang['siginvest_project_published'] = 'Опубликован';
+
+$_lang['siginvest_project_dev_profit_plan'] = 'Планируемая прибыль, $';
+$_lang['siginvest_project_dev_persent_to_inv'] = 'Инвесторам от прибыли, %';
+$_lang['siginvest_project_dev_term'] = 'Период распределения, мес.';
+$_lang['siginvest_project_dev_buyback'] ='Обратный выкуп долей, да/нет';
+$_lang['siginvest_project_dev_paid_count'] ='Количество распределений, шт.';
+$_lang['siginvest_project_dev_paid_vsego'] ='Всего выплачено, $';
+
 
 
 $_lang['siginvest_project_active'] = 'Опубликован';

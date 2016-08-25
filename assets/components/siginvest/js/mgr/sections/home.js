@@ -9,3 +9,4 @@ siginvest.page.Home = function (config) {
 };
 Ext.extend(siginvest.page.Home, MODx.Component);
 Ext.reg('siginvest-page-home', siginvest.page.Home);
+
