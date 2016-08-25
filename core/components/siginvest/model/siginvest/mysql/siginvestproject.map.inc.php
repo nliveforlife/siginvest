@@ -17,6 +17,12 @@ $xpdo_meta_map['siginvestProject']= array (
     'parts_left' => 10000,
     'project_invrs_count' => 0,
     'published' => 0,
+    'dev_profit_plan' => 0,
+    'dev_persent_to_inv' => 50,
+    'dev_term' => 3,
+    'dev_buyback' => 0,
+    'dev_paid_count' => 0,
+    'dev_paid_vsego' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -114,6 +120,60 @@ $xpdo_meta_map['siginvestProject']= array (
       'precision' => '1',
       'phptype' => 'boolean',
       'attributes' => 'unsigned',
+      'null' => true,
+      'default' => 0,
+    ),
+    'dev_profit_plan' => 
+    array (
+      'dbtype' => 'integer',
+      'precision' => '10',
+      'attributes' => 'unsigned',
+      'phptype' => 'integer',
+      'null' => true,
+      'default' => 0,
+    ),
+    'dev_persent_to_inv' => 
+    array (
+      'dbtype' => 'integer',
+      'precision' => '5',
+      'attributes' => 'unsigned',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 50,
+    ),
+    'dev_term' => 
+    array (
+      'dbtype' => 'integer',
+      'precision' => '5',
+      'attributes' => 'unsigned',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 3,
+    ),
+    'dev_buyback' => 
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '1',
+      'phptype' => 'boolean',
+      'attributes' => 'unsigned',
+      'null' => true,
+      'default' => 0,
+    ),
+    'dev_paid_count' => 
+    array (
+      'dbtype' => 'integer',
+      'precision' => '10',
+      'attributes' => 'unsigned',
+      'phptype' => 'integer',
+      'null' => true,
+      'default' => 0,
+    ),
+    'dev_paid_vsego' => 
+    array (
+      'dbtype' => 'integer',
+      'precision' => '10',
+      'attributes' => 'unsigned',
+      'phptype' => 'integer',
       'null' => true,
       'default' => 0,
     ),

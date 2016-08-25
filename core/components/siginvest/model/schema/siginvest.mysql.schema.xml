@@ -13,6 +13,12 @@
 		<field key="parts_left" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="true" default="10000" />
 		<field key="project_invrs_count" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="true" default="0" />
         <field key="published" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="true" default="0" />
+        <field key="dev_profit_plan" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="true" default="0" />
+        <field key="dev_persent_to_inv" dbtype="integer" precision="5" attributes="unsigned" phptype="integer" null="false" default="50" />
+        <field key="dev_term" dbtype="integer" precision="5" attributes="unsigned" phptype="integer" null="false" default="3" />
+        <field key="dev_buyback"  dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="true" default="0" />
+        <field key="dev_paid_count" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="true" default="0" />
+        <field key="dev_paid_vsego" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="true" default="0" />
 
 		<index alias="status" name="status" primary="false" unique="false" type="BTREE">
 			<column key="status" length="" collation="A" null="false" />
@@ -37,7 +43,21 @@
 		<field key="user_id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" default="0" />
 		<field key="email" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
 		<field key="partner_project_id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" default="0" />
-
 	</object>
+
+    <object class="sigDevidends" table="sig_Devidends" extends="xPDOSimpleObject">
+        <field key="project_id" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="true" default="0" />
+        <field key="name" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+        <field key="dev_paid" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="true" default="0" />
+        <field key="dev_paid_per_part" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="true" default="0" />
+        <field key="dev_paid_number" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="true" default="0" />
+        <field key="dev_paid_date" dbtype="timestamp" phptype="timestamp" null="false" default="CURRENT_TIMESTAMP" />
+        <field key="partner_owner_id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" default="0" />
+
+        <index alias="project_id" name="project_id" primary="false" unique="false" type="BTREE">
+            <column key="project_id" length="" collation="A" null="false" />
+        </index>
+    </object>
+
 
 </model>
