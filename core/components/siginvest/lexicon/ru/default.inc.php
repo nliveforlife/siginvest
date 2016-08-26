@@ -33,6 +33,7 @@ $_lang['siginvest_project_published'] = 'Опубликован';
 $_lang['siginvest_project_err_dup'] = 'Значение не уникально';
 
 
+
 $_lang['siginvest_project_dev_profit_plan'] = 'Планируемая прибыль, $';
 $_lang['siginvest_project_dev_persent_to_inv'] = 'Инвесторам от прибыли, %';
 $_lang['siginvest_project_dev_term'] = 'Период распределения, мес.';
