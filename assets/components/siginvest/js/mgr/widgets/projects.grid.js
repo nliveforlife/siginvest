@@ -133,7 +133,70 @@ siginvest.grid.Projects = function(config) {
         ,updateProject: function(grid, e, row) {
             if (typeof(row) != 'undefined') {this.menu.record = row.data;}
             var id = this.menu.record.id;
+            var parts_sold = this.menu.record.parts_sold;
 
+            if (parts_sold !== 0) {
+                console.log(parts_sold);
+                MODx.Ajax.request(
+                    {
+                        url: siginvest.config.connector_url
+                        ,params: {
+                        action: 'mgr/projects/get'
+                        ,id: id
+                    }
+                        ,listeners: {
+                        success: {fn:function(r) {
+                            if (this.windows.updateProjectLocked) {
+                                this.windows.updateProjectLocked.close();
+                                this.windows.updateProjectLocked.destroy();
+                            }
+                            this.windows.updateProjectLocked = MODx.load({
+
+                                xtype: 'siginvest-window-project-updatelocked'
+                                ,record: r
+                                ,listeners: {
+                                    success: {fn:function() { this.refresh(); },scope:this}
+                                }
+                            });
+                            this.windows.updateProjectLocked.fp.getForm().reset();
+                            this.windows.updateProjectLocked.fp.getForm().setValues(r.object);
+                            this.windows.updateProjectLocked.show(e.target);
+                        },scope:this}
+                    }
+                    });
+
+            }
+            else {
+                MODx.Ajax.request(
+                    {
+                        url: siginvest.config.connector_url
+                        ,params: {
+                        action: 'mgr/projects/get'
+                        ,id: id
+                    }
+                        ,listeners: {
+                        success: {fn:function(r) {
+                            if (this.windows.updateProject) {
+                                this.windows.updateProject.close();
+                                this.windows.updateProject.destroy();
+                            }
+                            this.windows.updateProject = MODx.load({
+
+                                xtype: 'siginvest-window-project-update'
+                                ,record: r
+                                ,listeners: {
+                                    success: {fn:function() { this.refresh(); },scope:this}
+                                }
+                            });
+                            this.windows.updateProject.fp.getForm().reset();
+                            this.windows.updateProject.fp.getForm().setValues(r.object);
+                            this.windows.updateProject.show(e.target);
+                        },scope:this}
+                    }
+                    });
+
+            }
+                /*
             MODx.Ajax.request(
                 {
                 url: siginvest.config.connector_url
@@ -161,6 +224,7 @@ siginvest.grid.Projects = function(config) {
                     },scope:this}
                 }
             });
+            */
         }
 
         ,removeProject: function(grid, e) {
@@ -371,6 +435,78 @@ siginvest.grid.Projects = function(config) {
     };
     Ext.extend(siginvest.window.UpdateProject,MODx.Window);
     Ext.reg('siginvest-window-project-update',siginvest.window.UpdateProject);
+
+
+    siginvest.window.UpdateProjectLocked = function(config) {
+        config = config || {};
+        this.ident = config.ident || 'meuproject'+Ext.id();
+        Ext.applyIf(config,{
+            title: _('siginvest_project_updatelocked')
+            ,id: this.ident
+            ,autoHeight: true
+            ,width: 650
+            ,url: siginvest.config.connector_url
+            ,action: 'mgr/projects/update'
+            ,fields:
+                [
+                    {xtype: 'textfield',fieldLabel: _('siginvest_project_name'),name: 'name',disabled: true,readOnly: true,    allowBlank:false, id: 'siginvest-'+this.ident+'-name',anchor: '100%'}
+                    ,{xtype: 'numberfield',fieldLabel: _('siginvest_id'),name: 'id',disabled: true,readOnly: true,   allowBlank:false, id: 'siginvest-'+this.ident+'-id',anchor: '100%'}
+                    ,{xtype: 'numberfield',fieldLabel: _('siginvest_project_id'),name: 'project_id',disabled: true,readOnly: true,   allowBlank:false, id: 'siginvest-'+this.ident+'-project_id',anchor: '100%',hidden: true}
+                    ,{
+                    layout:'column'
+                    ,border: false
+                    ,anchor: '100%'
+                    ,items: [{
+                        columnWidth: .5
+                        ,layout: 'form'
+                        ,defaults: { msgTarget: 'under' }
+                        ,border:false
+                        ,style: {margin: '0 10px 0 0'}
+                        ,items: [
+                            {xtype: 'numberfield',fieldLabel: _('siginvest_project_dev_profit_plan'),    name: 'dev_profit_plan',disabled: true,readOnly: true,   allowBlank:false,    id: 'siginvest-'+this.ident+'-dev_profit_plan',anchor: '100%', value: 1000,
+                                maxValue: 10000000,
+                                minValue: 100}
+                            ,{xtype: 'numberfield',fieldLabel: _('siginvest_project_dev_persent_to_inv'),name: 'dev_persent_to_inv',disabled: true,readOnly: true,   allowBlank:false, id: 'siginvest-'+this.ident+'-dev_persent_to_inv',anchor: '100%',value: 50,maxValue: 100,minValue: 10}
+                            ,{xtype: 'numberfield',fieldLabel: _('siginvest_project_dev_term'),          name: 'dev_term',disabled: true,readOnly: true,   allowBlank:false,           id: 'siginvest-'+this.ident+'-dev_term',anchor: '100%',value: 3,maxValue: 12,minValue: 1}
+                            ,{xtype: 'combo-boolean',fieldLabel: _('siginvest_project_dev_buyback'),       name: 'dev_buyback',disabled: true,readOnly: true,    hiddenName: 'dev_buyback', allowBlank:false,       id: 'siginvest-'+this.ident+'-dev_buyback',anchor: '50%'}
+                        ]
+                    },{
+                        columnWidth: .5
+                        ,layout: 'form'
+                        ,defaults: { msgTarget: 'under' }
+                        ,border:false
+                        ,style: {margin: 0}
+                        ,items: [
+                            {xtype: 'numberfield',fieldLabel: _('siginvest_project_parts_made'),         name: 'parts_made',allowBlank:false,disabled: true,readOnly: true,         id: 'siginvest-'+this.ident+'-parts_made',anchor: '100%',  value: 1000,
+                                maxValue: 1000000,
+                                minValue: 100}
+                            ,{xtype: 'numberfield',fieldLabel: _('siginvest_project_need_to_gather'),    name: 'need_to_gather',allowBlank:false,disabled: true,readOnly: true,     id: 'siginvest-'+this.ident+'-need_to_gather',anchor: '100%',    value: 1000,
+                                maxValue: 10000000,
+                                minValue: 100}
+                            ,{xtype: 'numberfield',fieldLabel: _('siginvest_project_current_part_price'),name: 'current_part_price',allowBlank:false,disabled: true,readOnly: true,   id: 'siginvest-'+this.ident+'-current_part_price',anchor: '100%', value: 10,
+                                maxValue: 10000,
+                                minValue: 10, step: 10
+                            }
+                            ,{xtype: 'combo-boolean',fieldLabel: _('siginvest_project_published'),          name: 'published',hiddenName: 'published',allowBlank:false, id: 'siginvest-'+this.ident+'-published',anchor: '50%'}
+                        ]
+                    }]
+                }
+                    ,{xtype: 'radiogroup',fieldLabel: _('siginvest_project_status'),name: 'status',id: 'siginvest-'+this.ident+'-status',anchor: '100%',columns: 3,vertical: true
+                    , items: [
+                        {boxLabel: 'На проверке', name: 'status', inputValue: 'atcheck', checked: true},
+                        {boxLabel: 'Активен', name: 'status', inputValue: 'active'},
+                        {boxLabel: 'Закрыт', name: 'status', inputValue: 'closed'}
+                    ]
+                }
+
+                ]
+
+            ,keys: [{key: Ext.EventObject.ENTER,shift: true,fn: function() {this.submit() },scope: this}]
+        });
+        siginvest.window.UpdateProjectLocked.superclass.constructor.call(this,config);
+    };
+    Ext.extend(siginvest.window.UpdateProjectLocked,MODx.Window);
+    Ext.reg('siginvest-window-project-updatelocked',siginvest.window.UpdateProjectLocked);
 
 
 

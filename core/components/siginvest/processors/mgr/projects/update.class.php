@@ -51,8 +51,12 @@ class siginvestProjectUpdateProcessor extends modObjectUpdateProcessor {
 			}
 		}
 
-		$active = $this->getProperty('active');
-		$this->setProperty('active', !empty($active) && $active != 'false');
+		$published = $this->getProperty('published');
+		$this->setProperty('published', !empty($published) && $published != 'false');
+
+		$dev_buyback = $this->getProperty('dev_buyback');
+		$this->setProperty('dev_buyback', !empty($dev_buyback) && $dev_buyback != 'false');
+
 
 		return !$this->hasErrors();
 	}

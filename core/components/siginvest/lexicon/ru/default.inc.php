@@ -32,6 +32,7 @@ $_lang['siginvest_project_image'] = 'Изображение';
 $_lang['siginvest_project_published'] = 'Разрешено инвестировать:';
 $_lang['siginvest_project_err_dup'] = 'Значение не уникально';
 $_lang['siginvest_project_del_prohibited'] = 'Этот проект удалять нельзя, он уже начал сбор инвестиций';
+$_lang['siginvest_project_updatelocked'] = 'Проект собирает инвестиции, его редактирование ограничено!';
 
 
 $_lang['siginvest_project_dev_profit_plan'] = 'Планируемая прибыль, $';
