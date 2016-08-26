@@ -3,7 +3,7 @@
 /**
  * Create an Item
  */
-class siginvestOfficeItemCreateProcessor extends modObjectCreateProcessor {
+class siginvestItemCreateProcessor extends modObjectCreateProcessor {
 	public $objectType = 'siginvestItem';
 	public $classKey = 'siginvestItem';
 	public $languageTopics = array('siginvest');
@@ -27,4 +27,4 @@ class siginvestOfficeItemCreateProcessor extends modObjectCreateProcessor {
 
 }
 
-return 'siginvestOfficeItemCreateProcessor';
+return 'siginvestItemCreateProcessor';

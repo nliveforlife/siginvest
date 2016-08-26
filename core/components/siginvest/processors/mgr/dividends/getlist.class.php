@@ -4,8 +4,8 @@
  * Get a list of Items
  */
 class siginvestItemGetListProcessor extends modObjectGetListProcessor {
-	public $objectType = 'siginvestItem';
-	public $classKey = 'siginvestItem';
+	public $objectType = 'siginvestProject';
+	public $classKey = 'siginvestProject';
 	public $defaultSortField = 'id';
 	public $defaultSortDirection = 'DESC';
 	//public $permission = 'list';

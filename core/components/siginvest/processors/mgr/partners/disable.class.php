@@ -3,7 +3,7 @@
 /**
  * Disable an Item
  */
-class siginvestOfficeItemDisableProcessor extends modObjectProcessor {
+class siginvestItemDisableProcessor extends modObjectProcessor {
 	public $objectType = 'siginvestItem';
 	public $classKey = 'siginvestItem';
 	public $languageTopics = array('siginvest');
@@ -38,4 +38,4 @@ class siginvestOfficeItemDisableProcessor extends modObjectProcessor {
 
 }
 
-return 'siginvestOfficeItemDisableProcessor';
+return 'siginvestItemDisableProcessor';

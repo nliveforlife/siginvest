@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Get an Item
+ * Get an Project
  */
-class siginvestOfficeItemGetProcessor extends modObjectGetProcessor {
-	public $objectType = 'siginvestItem';
-	public $classKey = 'siginvestItem';
+class siginvestProjectGetProcessor extends modObjectGetProcessor {
+	public $objectType = 'siginvestProject';
+	public $classKey = 'siginvestProject';
 	public $languageTopics = array('siginvest:default');
-	//public $permission = 'view';
+	public $permission = 'view';
 
 
 	/**
@@ -16,6 +16,7 @@ class siginvestOfficeItemGetProcessor extends modObjectGetProcessor {
 	 *
 	 * @return mixed
 	 */
+	/*
 	public function process() {
 		if (!$this->checkPermissions()) {
 			return $this->failure($this->modx->lexicon('access_denied'));
@@ -23,7 +24,7 @@ class siginvestOfficeItemGetProcessor extends modObjectGetProcessor {
 
 		return parent::process();
 	}
-
+*/
 }
 
-return 'siginvestOfficeItemGetProcessor';
+return 'siginvestProjectGetProcessor';

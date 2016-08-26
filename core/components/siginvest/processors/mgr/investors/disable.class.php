@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Remove an Items
+ * Disable an Item
  */
-class siginvestOfficeItemRemoveProcessor extends modObjectProcessor {
+class siginvestItemDisableProcessor extends modObjectProcessor {
 	public $objectType = 'siginvestItem';
 	public $classKey = 'siginvestItem';
 	public $languageTopics = array('siginvest');
-	//public $permission = 'remove';
+	//public $permission = 'save';
 
 
 	/**
@@ -29,7 +29,8 @@ class siginvestOfficeItemRemoveProcessor extends modObjectProcessor {
 				return $this->failure($this->modx->lexicon('siginvest_item_err_nf'));
 			}
 
-			$object->remove();
+			$object->set('active', false);
+			$object->save();
 		}
 
 		return $this->success();
@@ -37,4 +38,4 @@ class siginvestOfficeItemRemoveProcessor extends modObjectProcessor {
 
 }
 
-return 'siginvestOfficeItemRemoveProcessor';
+return 'siginvestItemDisableProcessor';

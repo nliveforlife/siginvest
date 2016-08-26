@@ -3,7 +3,7 @@
 /**
  * Update an Item
  */
-class siginvestOfficeItemUpdateProcessor extends modObjectUpdateProcessor {
+class siginvestItemUpdateProcessor extends modObjectUpdateProcessor {
 	public $objectType = 'siginvestItem';
 	public $classKey = 'siginvestItem';
 	public $languageTopics = array('siginvest');
@@ -46,4 +46,4 @@ class siginvestOfficeItemUpdateProcessor extends modObjectUpdateProcessor {
 	}
 }
 
-return 'siginvestOfficeItemUpdateProcessor';
+return 'siginvestItemUpdateProcessor';

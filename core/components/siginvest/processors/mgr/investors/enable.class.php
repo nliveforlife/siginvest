@@ -3,7 +3,7 @@
 /**
  * Enable an Item
  */
-class siginvestOfficeItemEnableProcessor extends modObjectProcessor {
+class siginvestItemEnableProcessor extends modObjectProcessor {
 	public $objectType = 'siginvestItem';
 	public $classKey = 'siginvestItem';
 	public $languageTopics = array('siginvest');
@@ -38,4 +38,4 @@ class siginvestOfficeItemEnableProcessor extends modObjectProcessor {
 
 }
 
-return 'siginvestOfficeItemEnableProcessor';
+return 'siginvestItemEnableProcessor';

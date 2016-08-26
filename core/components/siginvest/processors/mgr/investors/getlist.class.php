@@ -3,9 +3,9 @@
 /**
  * Get a list of Items
  */
-class siginvestOfficeItemGetListProcessor extends modObjectGetListProcessor {
-	public $objectType = 'siginvestItem';
-	public $classKey = 'siginvestItem';
+class siginvestItemGetListProcessor extends modObjectGetListProcessor {
+	public $objectType = 'siginvestProject';
+	public $classKey = 'siginvestProject';
 	public $defaultSortField = 'id';
 	public $defaultSortDirection = 'DESC';
 	//public $permission = 'list';
@@ -56,7 +56,7 @@ class siginvestOfficeItemGetListProcessor extends modObjectGetListProcessor {
 		// Edit
 		$array['actions'][] = array(
 			'cls' => '',
-			'icon' => 'fa fa-edit',
+			'icon' => 'icon icon-edit',
 			'title' => $this->modx->lexicon('siginvest_item_update'),
 			//'multiple' => $this->modx->lexicon('siginvest_items_update'),
 			'action' => 'updateItem',
@@ -67,7 +67,7 @@ class siginvestOfficeItemGetListProcessor extends modObjectGetListProcessor {
 		if (!$array['active']) {
 			$array['actions'][] = array(
 				'cls' => '',
-				'icon' => 'fa fa-power-off action-green',
+				'icon' => 'icon icon-power-off action-green',
 				'title' => $this->modx->lexicon('siginvest_item_enable'),
 				'multiple' => $this->modx->lexicon('siginvest_items_enable'),
 				'action' => 'enableItem',
@@ -78,7 +78,7 @@ class siginvestOfficeItemGetListProcessor extends modObjectGetListProcessor {
 		else {
 			$array['actions'][] = array(
 				'cls' => '',
-				'icon' => 'fa fa-power-off action-gray',
+				'icon' => 'icon icon-power-off action-gray',
 				'title' => $this->modx->lexicon('siginvest_item_disable'),
 				'multiple' => $this->modx->lexicon('siginvest_items_disable'),
 				'action' => 'disableItem',
@@ -90,7 +90,7 @@ class siginvestOfficeItemGetListProcessor extends modObjectGetListProcessor {
 		// Remove
 		$array['actions'][] = array(
 			'cls' => '',
-			'icon' => 'fa fa-trash-o action-red',
+			'icon' => 'icon icon-trash-o action-red',
 			'title' => $this->modx->lexicon('siginvest_item_remove'),
 			'multiple' => $this->modx->lexicon('siginvest_items_remove'),
 			'action' => 'removeItem',
@@ -103,4 +103,4 @@ class siginvestOfficeItemGetListProcessor extends modObjectGetListProcessor {
 
 }
 
-return 'siginvestOfficeItemGetListProcessor';
+return 'siginvestItemGetListProcessor';

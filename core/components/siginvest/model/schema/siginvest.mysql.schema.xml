@@ -5,13 +5,21 @@
 		<field key="project_id" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="true" default="0" />
 		<field key="name" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
 		<field key="status" dbtype="varchar" precision="30" phptype="string" null="false" default="atcheck" />
-		<field key="can_sell_parts" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="true" default="1" />
+		<field key="can_sell_parts" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="true" default="0" />
 		<field key="parts_made" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="false" default="1000" />
 		<field key="current_part_price" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="false" default="10" />
 		<field key="need_to_gather" dbtype="integer" precision="20" attributes="unsigned" phptype="integer" null="false" default="10000" />
 		<field key="parts_sold" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="true" default="0" />
-		<field key="parts_left" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="true" default="0" />
+		<field key="parts_left" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="true" default="10000" />
 		<field key="project_invrs_count" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="true" default="0" />
+        <field key="published" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="true" default="0" />
+        <field key="dev_profit_plan" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="true" default="0" />
+        <field key="dev_persent_to_inv" dbtype="integer" precision="5" attributes="unsigned" phptype="integer" null="false" default="50" />
+        <field key="dev_term" dbtype="integer" precision="5" attributes="unsigned" phptype="integer" null="false" default="3" />
+        <field key="dev_buyback"  dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="true" default="0" />
+
+        <field key="dev_paid_count" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="true" default="0" />
+        <field key="dev_paid_vsego" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="true" default="0" />
 
 		<index alias="status" name="status" primary="false" unique="false" type="BTREE">
 			<column key="status" length="" collation="A" null="false" />
@@ -20,18 +28,15 @@
 
 
 	<object class="sigInvestor" table="sig_Investors" extends="xPDOSimpleObject">
-		<field key="user_id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" default="0" />
-		<field key="email" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+		<field key="part_id" dbtype="varchar" precision="55" phptype="string" null="true"   default="" />
+        <field key="user_id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" default="0" />
 		<field key="order_id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" default="0" />
-		<field key="part_id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" default="0" />
-		<field key="project_id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" default="0" />
-		<field key="payment_method" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" default="0" />
+		<field key="project_id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" default="" />
 		<field key="order_time" dbtype="timestamp" phptype="timestamp" null="false" default="CURRENT_TIMESTAMP" />
 		<field key="order_status" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
 
-		<index alias="key" name="key" primary="false" unique="true" type="BTREE">
+		<index alias="user_id" name="user_id" primary="false" unique="false" type="BTREE">
 			<column key="user_id" length="" collation="A" null="false" />
-			<column key="email" length="" collation="A" null="false" />
 		</index>
 	</object>
 
@@ -39,12 +44,21 @@
 		<field key="user_id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" default="0" />
 		<field key="email" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
 		<field key="partner_project_id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" default="0" />
-
-		<index alias="key" name="key" primary="false" unique="true" type="BTREE">
-			<column key="user_id" length="" collation="A" null="false" />
-			<column key="email" length="" collation="A" null="false" />
-		</index>
-
 	</object>
+
+    <object class="sigDevidends" table="sig_Devidends" extends="xPDOSimpleObject">
+        <field key="project_id" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="true" default="0" />
+        <field key="name" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+        <field key="dev_paid" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="true" default="0" />
+        <field key="dev_paid_per_part" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="true" default="0" />
+        <field key="dev_paid_number" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="true" default="0" />
+        <field key="dev_paid_date" dbtype="timestamp" phptype="timestamp" null="false" default="CURRENT_TIMESTAMP" />
+        <field key="partner_owner_id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" default="0" />
+
+        <index alias="project_id" name="project_id" primary="false" unique="false" type="BTREE">
+            <column key="project_id" length="" collation="A" null="false" />
+        </index>
+    </object>
+
 
 </model>

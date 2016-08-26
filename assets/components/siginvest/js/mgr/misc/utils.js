@@ -1,3 +1,73 @@
+siginvest.utils.renderActions = function(value, props, row) {
+    var res = [];
+    for (var i in row.data.actions) {
+        if (!row.data.actions.hasOwnProperty(i)) {continue;}
+        var a = row.data.actions[i];
+        if (a['button']) {
+            var cls = typeof(a['class']) == 'object' && a['class']['button']
+                ? a['class']['button']
+                : '';
+            cls += ' ' + (MODx.modx23 ? 'icon icon-' : 'fa fa-') + a['icon'];
+
+            res.push(
+                '<li>\
+                    <button class="btn btn-default '+ cls +'" type="'+a['type']+'" title="'+_('siginvest_project_'+a['type'])+'"></button>\
+				</li>'
+            );
+        }
+    }
+
+    return '<ul class="siginvest-row-actions">' + res.join('') + '</ul>';
+};
+
+siginvest.utils.getMenu = function(actions, grid) {
+    var menu = [];
+    for (var i in actions) {
+        if (!actions.hasOwnProperty(i)) {continue;}
+        var a = actions[i];
+
+        if (!a['menu']) {
+            if (a == '-') {
+                console.log('pushed');
+                menu.push('-');}
+            continue;
+        }
+        else if (menu.length > 0 && /^remove/i.test(a['type'])) {
+            menu.push('-');
+        }
+
+        var cls = typeof(a['class']) == 'object' && a['class']['menu']
+            ? a['class']['menu']
+            : '';
+        cls += ' ' + (MODx.modx23 ? 'icon icon-' : 'fa fa-') + a['icon'];
+        
+
+        menu.push({
+            text: '<i class="' + cls + ' x-menu-item-icon"></i> ' + _('siginvest_project_' + a['type'])
+            ,handler: grid[a['type']]
+        });
+    }
+
+    return menu;
+};
+
+siginvest.utils.onAjax = function(el) {
+    Ext.Ajax.el = el;
+    Ext.Ajax.on('beforerequest', siginvest.utils.beforerequest);
+    Ext.Ajax.on('requestcomplete', siginvest.utils.requestcomplete);
+};
+
+siginvest.utils.beforerequest = function() {Ext.Ajax.el.mask(_('loading'),'x-mask-loading');};
+siginvest.utils.requestcomplete = function() {
+    Ext.Ajax.el.unmask();
+    Ext.Ajax.el = null;
+    Ext.Ajax.un('beforerequest', siginvest.utils.beforerequest);
+    Ext.Ajax.un('requestcomplete', siginvest.utils.requestcomplete);
+};
+
+
+
+/*
 siginvest.utils.renderBoolean = function (value, props, row) {
 	return value
 		? String.format('<span class="green">{0}</span>', _('yes'))
@@ -50,7 +120,6 @@ siginvest.utils.getMenu = function (actions, grid, selected) {
 	return menu;
 };
 
-
 siginvest.utils.renderActions = function (value, props, row) {
 	var res = [];
 	var cls, icon, title, action, item = '';
@@ -81,3 +150,5 @@ siginvest.utils.renderActions = function (value, props, row) {
 		res.join('')
 	);
 };
+
+*/

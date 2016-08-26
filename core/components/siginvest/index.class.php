@@ -54,6 +54,9 @@ class IndexManagerController extends siginvestMainController {
 	/**
 	 * @return string
 	 */
+	/* какой дальше загружается контроллер:
+	/core/components/....../controllers/home.class.php
+	  */
 	public static function getDefaultController() {
 		return 'home';
 	}
