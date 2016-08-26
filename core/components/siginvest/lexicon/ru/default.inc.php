@@ -30,6 +30,8 @@ $_lang['siginvest_project_current_part_price'] = 'Цена доли, $';
 $_lang['siginvest_project_actions'] = 'Действия';
 $_lang['siginvest_project_image'] = 'Изображение';
 $_lang['siginvest_project_published'] = 'Опубликован';
+$_lang['siginvest_project_err_dup'] = 'Значение не уникально';
+
 
 $_lang['siginvest_project_dev_profit_plan'] = 'Планируемая прибыль, $';
 $_lang['siginvest_project_dev_persent_to_inv'] = 'Инвесторам от прибыли, %';
