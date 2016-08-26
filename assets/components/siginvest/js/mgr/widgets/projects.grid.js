@@ -281,7 +281,7 @@ siginvest.grid.Projects = function(config) {
                                 maxValue: 10000,
                                 minValue: 10, step: 10
                             }
-                            ,{xtype: 'combo-boolean',fieldLabel: _('siginvest_project_active'),          name: 'active',allowBlank:false, id: 'siginvest-'+this.ident+'-active',anchor: '50%'}
+                            ,{xtype: 'combo-boolean',fieldLabel: _('siginvest_project_published'),          name: 'published',allowBlank:false, id: 'siginvest-'+this.ident+'-published',anchor: '50%'}
                         ]
                     }]
                 }
@@ -314,6 +314,7 @@ siginvest.grid.Projects = function(config) {
             ,fields:
                 [
                     {xtype: 'textfield',fieldLabel: _('siginvest_project_name'),name: 'name',allowBlank:false, id: 'siginvest-'+this.ident+'-name',anchor: '100%'}
+                    ,{xtype: 'numberfield',fieldLabel: _('siginvest_id'),name: 'id',allowBlank:false, id: 'siginvest-'+this.ident+'-id',anchor: '100%', hidden: true}
                     ,{xtype: 'numberfield',fieldLabel: _('siginvest_project_id'),name: 'project_id',allowBlank:false, id: 'siginvest-'+this.ident+'-project_id',anchor: '100%'}
                     ,{
                     layout:'column'
@@ -350,154 +351,19 @@ siginvest.grid.Projects = function(config) {
                                 maxValue: 10000,
                                 minValue: 10, step: 10
                             }
-                            ,{xtype: 'combo-boolean',fieldLabel: _('siginvest_project_active'),          name: 'active',allowBlank:false, id: 'siginvest-'+this.ident+'-active',anchor: '50%'}
+                            ,{xtype: 'combo-boolean',fieldLabel: _('siginvest_project_published'),          name: 'published',allowBlank:false, id: 'siginvest-'+this.ident+'-published',anchor: '50%'}
                         ]
                     }]
                 }
                     ,{xtype: 'radiogroup',fieldLabel: _('siginvest_project_status'),name: 'status',id: 'siginvest-'+this.ident+'-status',anchor: '100%',columns: 3,vertical: true
                     , items: [
-                        {boxLabel: 'На проверке', name: 'rb', inputValue: 'atcheck', checked: true},
-                        {boxLabel: 'Активен', name: 'rb', inputValue: 'active'},
-                        {boxLabel: 'Закрыт', name: 'rb', inputValue: 'closed'}
+                        {boxLabel: 'На проверке', name: 'status', inputValue: 'atcheck', checked: true},
+                        {boxLabel: 'Активен', name: 'status', inputValue: 'active'},
+                        {boxLabel: 'Закрыт', name: 'status', inputValue: 'closed'}
                     ]
                 }
 
                 ]
-
-/*
-        {
-            xtype: 'modx-tabs'
-                , stateful
-        :
-            true
-                , stateId
-        :
-            'siginvest-window-project-update'
-                , stateEvents
-        :
-            ['tabchange']
-                , getState
-        :
-            function () {
-                return {activeTab: this.items.indexOf(this.getActiveTab())};
-            }
-
-        ,
-            deferredRender: false
-                , border
-        :
-            true
-                , items
-        :
-            [{
-                title: _('siginvest_project')
-                , hideMode: 'offsets'
-                , layout: 'form'
-                , border: true
-                , cls: MODx.modx23 ? '' : 'main-wrapper'
-                , items: [
-                    {xtype: 'hidden', name: 'id', id: 'siginvest-' + this.ident + '-id'}
-                    , {
-                        xtype: 'textfield',
-                        fieldLabel: _('siginvest_project_name'),
-                        name: 'name',
-                        id: 'siginvest-' + this.ident + '-name',
-                        anchor: '100%'
-                    }
-                    , {
-                        xtype: 'modx-combo-template',
-                        editable: true,
-                        fieldLabel: _('siginvest_project_template'),
-                        name: 'template',
-                        id: 'siginvest-' + this.ident + '-template',
-                        anchor: '100%'
-                    }
-                    , {
-                        layout: 'column'
-                        , border: false
-                        , anchor: '100%'
-                        , items: [{
-                            columnWidth: .5
-                            , layout: 'form'
-                            , defaults: {msgTarget: 'under'}
-                            , border: false
-                            , style: {margin: '0 10px 0 0'}
-                            , items: [
-                                {
-                                    xtype: 'textfield',
-                                    fieldLabel: _('siginvest_project_email_subject'),
-                                    name: 'email_subject',
-                                    id: 'siginvest-' + this.ident + '-email_subject',
-                                    anchor: '100%'
-                                }
-                                , {
-                                    xtype: 'textfield',
-                                    fieldLabel: _('siginvest_project_email_reply'),
-                                    name: 'email_reply',
-                                    id: 'siginvest-' + this.ident + '-email_reply',
-                                    anchor: '100%'
-                                }
-                                , {
-                                    xtype: 'combo-boolean',
-                                    fieldLabel: _('siginvest_project_active'),
-                                    name: 'active',
-                                    hiddenName: 'active',
-                                    id: 'siginvest-' + this.ident + '-active',
-                                    anchor: '50%'
-                                }
-                            ]
-                        }, {
-                            columnWidth: .5
-                            , layout: 'form'
-                            , defaults: {msgTarget: 'under'}
-                            , border: false
-                            , style: {margin: 0}
-                            , items: [
-                                {
-                                    xtype: 'textfield',
-                                    fieldLabel: _('siginvest_project_email_from'),
-                                    name: 'email_from',
-                                    id: 'siginvest-' + this.ident + '-email_from',
-                                    anchor: '100%'
-                                }
-                                , {
-                                    xtype: 'textfield',
-                                    fieldLabel: _('siginvest_project_email_from_name'),
-                                    name: 'email_from_name',
-                                    id: 'siginvest-' + this.ident + '-email_from_name',
-                                    anchor: '100%'
-                                }
-                                , {
-                                    xtype: 'modx-combo-browser',
-                                    fieldLabel: _('siginvest_project_image'),
-                                    name: 'image',
-                                    id: 'siginvest-' + this.ident + '-image',
-                                    anchor: '100%'
-                                }
-                            ]
-                        }]
-                    }
-                    , {
-                        xtype: 'textarea',
-                        fieldLabel: _('siginvest_project_description'),
-                        name: 'description',
-                        id: 'siginvest-' + this.ident + '-description',
-                        height: 75,
-                        anchor: '100%'
-                    }
-                ]
-            }
-
-                , {
-                title: _('siginvest_subscribers')
-                , xtype: 'siginvest-grid-project-subscribers'
-                , layout: 'anchor', cls: MODx.modx23 ? '' : 'main-wrapper'
-                , record: config.record.object
-                , pageSize: 5
-            }]
-
-        }  */
-
 
             ,keys: [{key: Ext.EventObject.ENTER,shift: true,fn: function() {this.submit() },scope: this}]
         });

@@ -31,7 +31,7 @@ $_lang['siginvest_project_actions'] = 'Действия';
 $_lang['siginvest_project_image'] = 'Изображение';
 $_lang['siginvest_project_published'] = 'Опубликован';
 $_lang['siginvest_project_err_dup'] = 'Значение не уникально';
-
+//$_lang['siginvest_project_err_ns'] = 'Ошибка в this->primaryKeyField';
 
 
 $_lang['siginvest_project_dev_profit_plan'] = 'Планируемая прибыль, $';
@@ -63,6 +63,7 @@ $_lang['siginvest_project_err_name'] = 'Вы должны указать имя 
 $_lang['siginvest_project_err_ae'] = 'Проект с таким именем уже существует.';
 $_lang['siginvest_project_err_nf'] = 'Проект не найден.';
 $_lang['siginvest_project_err_ns'] = 'Проект не указан.';
+
 $_lang['siginvest_project_err_remove'] = 'Ошибка при удалении Проекта.';
 $_lang['siginvest_project_err_save'] = 'Ошибка при сохранении Проекта.';
 
