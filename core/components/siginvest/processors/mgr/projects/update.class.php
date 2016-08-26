@@ -43,10 +43,10 @@ class siginvestProjectUpdateProcessor extends modObjectUpdateProcessor {
 				$this->addFieldError($tmp, $this->modx->lexicon('field_required'));
 			}
 		}
-		$unique = array('name');
 
+		$unique = array('name','project_id');
 		foreach ($unique as $tmp) {
-			if ($this->modx->getCount($this->classKey, array('name' => $this->getProperty($tmp), 'id:!=' => $this->getProperty('id')))) {
+			if ($this->modx->getCount($this->classKey, array($tmp => $this->getProperty($tmp), 'id:!=' => $this->getProperty('id')))) {
 				$this->addFieldError($tmp, $this->modx->lexicon('siginvest_project_err_dup'));
 			}
 		}

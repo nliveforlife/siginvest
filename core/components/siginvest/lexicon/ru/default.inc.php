@@ -14,7 +14,7 @@ $_lang['siginvest_items'] = 'Предметы';
 
 $_lang['siginvest_projects'] = 'Проекты';
 $_lang['siginvest_project_btn_create'] = 'Создать Инвестиционный Проект';
-$_lang['siginvest_project_id'] = 'Id страницы проекта';
+$_lang['siginvest_project_id'] = 'ID страницы проекта';
 $_lang['siginvest_id'] = "ID";
 $_lang['siginvest_project_name'] = 'Название проекта';
 $_lang['siginvest_project_description'] = 'Описание';
@@ -29,9 +29,9 @@ $_lang['siginvest_project_still_need'] = 'Осталось собрать, $';
 $_lang['siginvest_project_current_part_price'] = 'Цена доли, $';
 $_lang['siginvest_project_actions'] = 'Действия';
 $_lang['siginvest_project_image'] = 'Изображение';
-$_lang['siginvest_project_published'] = 'Опубликован';
+$_lang['siginvest_project_published'] = 'Разрешено инвестировать:';
 $_lang['siginvest_project_err_dup'] = 'Значение не уникально';
-//$_lang['siginvest_project_err_ns'] = 'Ошибка в this->primaryKeyField';
+$_lang['siginvest_project_del_prohibited'] = 'Этот проект удалять нельзя, он уже начал сбор инвестиций';
 
 
 $_lang['siginvest_project_dev_profit_plan'] = 'Планируемая прибыль, $';

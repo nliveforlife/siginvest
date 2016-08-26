@@ -21,6 +21,14 @@ class siginvestProjectItemCreateProcessor extends modObjectCreateProcessor {
 		elseif ($this->modx->getCount($this->classKey, array('name' => $name))) {
 			$this->modx->error->addField('name', $this->modx->lexicon('siginvest_project_err_ae'));
 		}
+		//
+		$unique = array('name','project_id');
+		foreach ($unique as $tmp) {
+			if ($this->modx->getCount($this->classKey, array($tmp => $this->getProperty($tmp), 'id:!=' => $this->getProperty('id')))) {
+				$this->addFieldError($tmp, $this->modx->lexicon('siginvest_project_err_dup'));
+			}
+		}
+		//
 
 		return parent::beforeSet();
 	}

@@ -16,8 +16,8 @@ siginvest.grid.Projects = function(config) {
             ,remoteSort: true
             ,sm: this.sm
             ,columns: [
-                {header: _('siginvest_id'), sortable: true, dataIndex: 'id',width: 10}
-                ,{header: _('siginvest_project_id'), sortable: true, dataIndex: 'project_id',width: 10}
+                {header: _('siginvest_id'), sortable: true, dataIndex: 'id',width: 10, hidden: true}
+                ,{header: _('siginvest_project_id'), sortable: true, dataIndex: 'project_id',width: 50}
                 ,{header: _('siginvest_project_name'), sortable: true, dataIndex: 'name',width: 50}
                 ,{header: _('siginvest_project_status'), sortable: true, dataIndex: 'status',width: 30}
                 ,{header: _('siginvest_project_parts_made'), sortable: true, dataIndex: 'parts_made',width: 40}
@@ -332,7 +332,7 @@ siginvest.grid.Projects = function(config) {
                                 minValue: 100}
                             ,{xtype: 'numberfield',fieldLabel: _('siginvest_project_dev_persent_to_inv'),name: 'dev_persent_to_inv',allowBlank:false, id: 'siginvest-'+this.ident+'-dev_persent_to_inv',anchor: '100%',value: 50,maxValue: 100,minValue: 10}
                             ,{xtype: 'numberfield',fieldLabel: _('siginvest_project_dev_term'),          name: 'dev_term',allowBlank:false,           id: 'siginvest-'+this.ident+'-dev_term',anchor: '100%',value: 3,maxValue: 12,minValue: 1}
-                            ,{xtype: 'combo-boolean',fieldLabel: _('siginvest_project_dev_buyback'),       name: 'dev_buyback',allowBlank:false,      id: 'siginvest-'+this.ident+'-dev_buyback',anchor: '50%'}
+                            ,{xtype: 'combo-boolean',fieldLabel: _('siginvest_project_dev_buyback'),       name: 'dev_buyback',hiddenName: 'dev_buyback', allowBlank:false,       id: 'siginvest-'+this.ident+'-dev_buyback',anchor: '50%'}
                         ]
                     },{
                         columnWidth: .5
@@ -351,7 +351,7 @@ siginvest.grid.Projects = function(config) {
                                 maxValue: 10000,
                                 minValue: 10, step: 10
                             }
-                            ,{xtype: 'combo-boolean',fieldLabel: _('siginvest_project_published'),          name: 'published',allowBlank:false, id: 'siginvest-'+this.ident+'-published',anchor: '50%'}
+                            ,{xtype: 'combo-boolean',fieldLabel: _('siginvest_project_published'),          name: 'published',hiddenName: 'published',allowBlank:false, id: 'siginvest-'+this.ident+'-published',anchor: '50%'}
                         ]
                     }]
                 }

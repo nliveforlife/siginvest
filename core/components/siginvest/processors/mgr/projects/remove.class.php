@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Remove an Items
+ * Remove an Projects
  */
-class siginvestItemRemoveProcessor extends modObjectProcessor {
-	public $objectType = 'siginvestItem';
-	public $classKey = 'siginvestItem';
+class siginvestProjectRemoveProcessor extends modObjectProcessor {
+	public $objectType = 'siginvestProject';
+	public $classKey = 'siginvestProject';
 	public $languageTopics = array('siginvest');
-	//public $permission = 'remove';
+	public $permission = 'remove';
 
 
 	/**
@@ -18,23 +18,29 @@ class siginvestItemRemoveProcessor extends modObjectProcessor {
 			return $this->failure($this->modx->lexicon('access_denied'));
 		}
 
-		$ids = $this->modx->fromJSON($this->getProperty('ids'));
-		if (empty($ids)) {
-			return $this->failure($this->modx->lexicon('siginvest_item_err_ns'));
-		}
 
-		foreach ($ids as $id) {
-			/** @var siginvestItem $object */
-			if (!$object = $this->modx->getObject($this->classKey, $id)) {
-				return $this->failure($this->modx->lexicon('siginvest_item_err_nf'));
+
+
+		if (!$ids = explode(',', $this->getProperty('ids'))) {
+			return $this->failure($this->modx->lexicon('siginvest_projects_err_ns'));
+		}
+		$projects = $this->modx->getIterator($this->classKey, array('id:IN' => $ids));
+		$unique = array('parts_sold');
+		foreach ($unique as $tmp) {
+			$sold_parts_count = $this->modx->getObject($this->classKey, array($tmp => $this->getProperty($tmp), 'id:!=' => $this->getProperty('id')));
+				if ($sold_parts_count !== 0) {
+					return $this->failure($this->modx->lexicon('siginvest_project_del_prohibited'));
 			}
-
-			$object->remove();
 		}
 
+		/** @var siginvestProject $project */
+		foreach ($projects as $project) {
+			$project->remove();
+		}
 		return $this->success();
+
 	}
 
 }
 
-return 'siginvestItemRemoveProcessor';
+return 'siginvestProjectRemoveProcessor';
