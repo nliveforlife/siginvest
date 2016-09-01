@@ -197,35 +197,6 @@ siginvest.grid.Projects = function(config) {
                     });
 
             }
-                /*
-            MODx.Ajax.request(
-                {
-                url: siginvest.config.connector_url
-                ,params: {
-                    action: 'mgr/projects/get'
-                    ,id: id
-                }
-                ,listeners: {
-                    success: {fn:function(r) {
-                        if (this.windows.updateProject) {
-                            this.windows.updateProject.close();
-                            this.windows.updateProject.destroy();
-                        }
-                        this.windows.updateProject = MODx.load({
-
-                            xtype: 'siginvest-window-project-update'
-                            ,record: r
-                            ,listeners: {
-                                success: {fn:function() { this.refresh(); },scope:this}
-                            }
-                        });
-                        this.windows.updateProject.fp.getForm().reset();
-                        this.windows.updateProject.fp.getForm().setValues(r.object);
-                        this.windows.updateProject.show(e.target);
-                    },scope:this}
-                }
-            });
-            */
         }
 
         ,removeProject: function(grid, e) {
@@ -410,9 +381,10 @@ siginvest.grid.Projects = function(config) {
                             {xtype: 'numberfield',fieldLabel: _('siginvest_project_parts_made'),         name: 'parts_made',allowBlank:false,        id: 'siginvest-'+this.ident+'-parts_made',anchor: '100%',  value: 1000,
                                 maxValue: 1000000,
                                 minValue: 100}
-                            ,{xtype: 'numberfield',fieldLabel: _('siginvest_project_need_to_gather'),    name: 'need_to_gather',allowBlank:false,    id: 'siginvest-'+this.ident+'-need_to_gather',anchor: '100%',    value: 1000,
-                                maxValue: 10000000,
-                                minValue: 100}
+                            ,{xtype: 'numberfield',fieldLabel: _('siginvest_project_need_to_gather'), name: 'need_to_gather',allowBlank:false,id: 'siginvest-'+this.ident+'-need_to_gather'  ,anchor: '100%',maxValue: 10000000,minValue: 100    }
+
+
+
                             ,{xtype: 'numberfield',fieldLabel: _('siginvest_project_current_part_price'),name: 'current_part_price',allowBlank:false,id: 'siginvest-'+this.ident+'-current_part_price',anchor: '100%', value: 10,
                                 maxValue: 10000,
                                 minValue: 10, step: 10

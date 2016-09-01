@@ -3,7 +3,7 @@
 /**
  * Create an Item
  */
-class siginvestProjectItemCreateProcessor extends modObjectCreateProcessor {
+class siginvestProjectCreateProcessor extends modObjectCreateProcessor {
 	public $objectType = 'siginvestProject';
 	public $classKey = 'siginvestProject';
 	public $languageTopics = array('siginvest');
@@ -61,18 +61,14 @@ class siginvestProjectItemCreateProcessor extends modObjectCreateProcessor {
 			));
 		$newPartner->save();
 
-		/*		 * We set the price to minishop2 product (our project)
-		  */
-		$part_price = $this->getProperty('part_price');
-		$modx->log(modX::LOG_LEVEL_ERROR, 'Part_Price: ' . $part_price);
-		$modx->log(modX::LOG_LEVEL_ERROR, $part_price);
-
+		// Set price to msProduct
+		$part_price = $this->getProperty('current_part_price');
 		$project_id = $this->getProperty('project_id');
+		global $modx;
 		$msProduct =  $modx->getObject('msProduct', $project_id);
-		$price = $msProduct->getProperty('price');
-		$modx->log(modX::LOG_LEVEL_ERROR, 'msProduct_Price: ' . $price);
-		$modx->log(modX::LOG_LEVEL_ERROR, $price);
-
+	//	$price = $msProduct->get('price');
+		$msProduct->set('price', $part_price);
+		$msProduct->save();
 
 		// End of  set price
 
@@ -82,4 +78,4 @@ class siginvestProjectItemCreateProcessor extends modObjectCreateProcessor {
 
 }
 
-return 'siginvestProjectItemCreateProcessor';
+return 'siginvestProjectCreateProcessor';

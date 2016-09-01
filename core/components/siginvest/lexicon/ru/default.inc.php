@@ -14,7 +14,7 @@ $_lang['siginvest_items'] = 'Предметы';
 
 $_lang['siginvest_projects'] = 'Проекты';
 $_lang['siginvest_project_btn_create'] = 'Создать Инвестиционный Проект';
-$_lang['siginvest_project_id'] = 'ID страницы проекта';
+$_lang['siginvest_project_id'] = 'ID страницы проекта:';
 $_lang['siginvest_id'] = "ID";
 $_lang['siginvest_project_name'] = 'Название проекта';
 $_lang['siginvest_project_description'] = 'Описание';
@@ -31,9 +31,11 @@ $_lang['siginvest_project_actions'] = 'Действия';
 $_lang['siginvest_project_image'] = 'Изображение';
 $_lang['siginvest_project_published'] = 'Разрешено инвестировать:';
 $_lang['siginvest_project_err_dup'] = 'Значение не уникально';
-$_lang['siginvest_project_del_prohibited'] = 'Этот проект удалять нельзя, он уже начал сбор инвестиций';
+$_lang['siginvest_project_del_prohibited'] = 'Этот проект удалить нельзя, он уже начал сбор инвестиций';
 $_lang['siginvest_project_updatelocked'] = 'Проект собирает инвестиции, его редактирование ограничено!';
-$_lang['siginvest_project_partner_id'] = 'ID партнера';
+$_lang['siginvest_project_partner_id'] = 'ID партнера:';
+$_lang['siginvest_project_err_sum'] = 'Ошибка в значении поля "Нужно собрать"';
+
 
 $_lang['siginvest_project_dev_profit_plan'] = 'Планируемая прибыль, $';
 $_lang['siginvest_project_dev_persent_to_inv'] = 'Инвесторам от прибыли, %';

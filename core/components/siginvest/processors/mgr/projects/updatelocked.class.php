@@ -60,6 +60,19 @@ class siginvestProjectUpdateLockedProcessor extends modObjectUpdateProcessor {
 		$dev_buyback = $this->getProperty('dev_buyback');
 		$this->setProperty('dev_buyback', !empty($dev_buyback) && $dev_buyback != 'false');
 
+	// Set price to msProduct
+		$part_price = $this->getProperty('current_part_price');
+		$project_id = $this->getProperty('project_id');
+		global $modx;
+		$msProduct =  $modx->getObject('msProduct', $project_id);
+		$price = $msProduct->get('price');
+		if ($price !== $part_price) {
+			$msProduct->set('price', $part_price);
+			$msProduct->save();
+		}
+	// end
+
+
 
 		return !$this->hasErrors();
 	}

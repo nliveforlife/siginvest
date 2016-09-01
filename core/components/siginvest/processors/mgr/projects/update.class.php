@@ -50,6 +50,15 @@ class siginvestProjectUpdateProcessor extends modObjectUpdateProcessor {
 				$this->addFieldError($tmp, $this->modx->lexicon('siginvest_project_err_dup'));
 			}
 		}
+		// check field need_to_get
+		$part_price = $this->getProperty('current_part_price');
+		$parts_made = $this->getProperty('parts_made');
+		$need_to_gather = $this->getProperty('need_to_gather');
+		$real_need = $part_price * $parts_made;
+		if ($real_need != $need_to_gather) {
+			return $this->modx->lexicon('siginvest_project_err_sum');
+		}
+		// End check
 
 		$published = $this->getProperty('published');
 		$this->setProperty('published', !empty($published) && $published != 'false');
@@ -57,26 +66,24 @@ class siginvestProjectUpdateProcessor extends modObjectUpdateProcessor {
 		$dev_buyback = $this->getProperty('dev_buyback');
 		$this->setProperty('dev_buyback', !empty($dev_buyback) && $dev_buyback != 'false');
 
+		return !$this->hasErrors();
+	}
 
+	public function afterSave() {
 		// Set price to msProduct
 		$part_price = $this->getProperty('current_part_price');
 		$project_id = $this->getProperty('project_id');
 		global $modx;
 		$msProduct =  $modx->getObject('msProduct', $project_id);
 		$price = $msProduct->get('price');
-		$msProduct->set('price', $part_price);
-		$msProduct->save();
-
-	$modx->log(modX::LOG_LEVEL_ERROR, 'Part_Price: ' . $part_price);
-
-	$modx->log(modX::LOG_LEVEL_ERROR, 'msProduct_Price: ' . $price);
-
-
+		if ($price !== $part_price) {
+			$msProduct->set('price', $part_price);
+			$msProduct->save();
+		}
 		// end
-
-
-		return !$this->hasErrors();
+		return true;
 	}
+
 
 }
 
