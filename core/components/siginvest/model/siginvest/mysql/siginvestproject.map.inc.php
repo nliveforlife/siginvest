@@ -23,6 +23,7 @@ $xpdo_meta_map['siginvestProject']= array (
     'dev_buyback' => 0,
     'dev_paid_count' => 0,
     'dev_paid_vsego' => 0,
+    'partner_id' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -177,6 +178,15 @@ $xpdo_meta_map['siginvestProject']= array (
       'null' => true,
       'default' => 0,
     ),
+    'partner_id' => 
+    array (
+      'dbtype' => 'integer',
+      'precision' => '10',
+      'attributes' => 'unsigned',
+      'phptype' => 'integer',
+      'null' => true,
+      'default' => 0,
+    ),
   ),
   'indexes' => 
   array (
@@ -195,6 +205,49 @@ $xpdo_meta_map['siginvestProject']= array (
           'null' => false,
         ),
       ),
+    ),
+    'project_id' => 
+    array (
+      'alias' => 'project_id',
+      'primary' => false,
+      'unique' => true,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'project_id' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'partner_id' => 
+    array (
+      'alias' => 'partner_id',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'partner_id' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+  ),
+  'composites' => 
+  array (
+    'project_partner' => 
+    array (
+      'class' => 'sigPartner',
+      'local' => 'project_id',
+      'foreign' => 'partner_project_id',
+      'cardinality' => 'one',
+      'owner' => 'local',
     ),
   ),
 );

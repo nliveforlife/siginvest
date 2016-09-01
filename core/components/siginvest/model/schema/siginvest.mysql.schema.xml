@@ -17,13 +17,22 @@
         <field key="dev_persent_to_inv" dbtype="integer" precision="5" attributes="unsigned" phptype="integer" null="false" default="50" />
         <field key="dev_term" dbtype="integer" precision="5" attributes="unsigned" phptype="integer" null="false" default="3" />
         <field key="dev_buyback"  dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="true" default="0" />
-
         <field key="dev_paid_count" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="true" default="0" />
         <field key="dev_paid_vsego" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="true" default="0" />
+		<field key="partner_id" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="true" default="0" />
 
 		<index alias="status" name="status" primary="false" unique="false" type="BTREE">
 			<column key="status" length="" collation="A" null="false" />
 		</index>
+		<index alias="project_id" name="project_id" primary="false" unique="true" type="BTREE">
+			<column key="project_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="partner_id" name="partner_id" primary="false" unique="false" type="BTREE">
+			<column key="partner_id" length="" collation="A" null="false" />
+		</index>
+
+        <composite alias="project_partner" class="sigPartner" local="project_id" foreign="partner_project_id" cardinality="one" owner="local" />
+
 	</object>
 
 

@@ -10,7 +10,7 @@ siginvest.grid.Projects = function(config) {
             }
             ,fields: ['id','project_id','name','status','parts_made','parts_sold','need_to_gather'
                 ,'project_invrs_count','current_part_price','dev_profit_plan','dev_persent_to_inv',
-                'dev_term','dev_buyback','dev_paid_count','dev_paid_vsego','published','actions']
+                'dev_term','dev_buyback','dev_paid_count','dev_paid_vsego','published','partner_id','actions']
             ,autoHeight: true
             ,paging: true
             ,remoteSort: true
@@ -31,6 +31,7 @@ siginvest.grid.Projects = function(config) {
                 ,{header: _('siginvest_project_dev_buyback'), sortable: true, dataIndex: 'dev_buyback',width: 30,hidden: true, renderer: this._renderBoolean}
                 ,{header: _('siginvest_project_dev_paid_count'), sortable: true, dataIndex: 'dev_paid_count',width: 30,hidden: true}
                 ,{header: _('siginvest_project_dev_paid_vsego'), sortable: true, dataIndex: 'dev_paid_vsego',width: 30,hidden: true}
+                ,{header: _('siginvest_project_partner_id'), sortable: true, dataIndex: 'partner_id',width: 30,hidden: true}
                 ,{header: _('siginvest_project_published'), sortable: true, dataIndex: 'published',width: 20, renderer: this._renderBoolean}
                 ,{header: _('siginvest_project_actions'), dataIndex: 'actions',width: 40,renderer: siginvest.utils.renderActions, id: 'actions'}
             ]
@@ -136,7 +137,7 @@ siginvest.grid.Projects = function(config) {
             var parts_sold = this.menu.record.parts_sold;
 
             if (parts_sold !== 0) {
-                console.log(parts_sold);
+        //        console.log(parts_sold);
                 MODx.Ajax.request(
                     {
                         url: siginvest.config.connector_url
@@ -306,10 +307,10 @@ siginvest.grid.Projects = function(config) {
             ,url: siginvest.config.connector_url
             ,action: 'mgr/projects/create'
             ,fields:
-
                 [
                 {xtype: 'textfield',fieldLabel: _('siginvest_project_name'),name: 'name',allowBlank:false, id: 'siginvest-'+this.ident+'-name',anchor: '100%'}
                 ,{xtype: 'numberfield',fieldLabel: _('siginvest_project_id'),name: 'project_id',allowBlank:false, id: 'siginvest-'+this.ident+'-project_id',anchor: '100%'}
+                ,{xtype: 'numberfield',fieldLabel: _('siginvest_project_partner_id'),name: 'partner_id',allowBlank:false, id: 'siginvest-'+this.ident+'-project_partner_id',anchor: '100%'}
                 ,{
                     layout:'column'
                     ,border: false
@@ -380,6 +381,7 @@ siginvest.grid.Projects = function(config) {
                     {xtype: 'textfield',fieldLabel: _('siginvest_project_name'),name: 'name',allowBlank:false, id: 'siginvest-'+this.ident+'-name',anchor: '100%'}
                     ,{xtype: 'numberfield',fieldLabel: _('siginvest_id'),name: 'id',allowBlank:false, id: 'siginvest-'+this.ident+'-id',anchor: '100%', hidden: true}
                     ,{xtype: 'numberfield',fieldLabel: _('siginvest_project_id'),name: 'project_id',allowBlank:false, id: 'siginvest-'+this.ident+'-project_id',anchor: '100%'}
+                    ,{xtype: 'numberfield',fieldLabel: _('siginvest_project_partner_id'),name: 'partner_id',allowBlank:false, id: 'siginvest-'+this.ident+'-project_partner_id',anchor: '100%'}
                     ,{
                     layout:'column'
                     ,border: false
@@ -446,12 +448,16 @@ siginvest.grid.Projects = function(config) {
             ,autoHeight: true
             ,width: 650
             ,url: siginvest.config.connector_url
-            ,action: 'mgr/projects/update'
+            ,action: 'mgr/projects/updatelocked'
             ,fields:
                 [
-                    {xtype: 'textfield',fieldLabel: _('siginvest_project_name'),name: 'name',disabled: true,readOnly: true,    allowBlank:false, id: 'siginvest-'+this.ident+'-name',anchor: '100%'}
-                    ,{xtype: 'numberfield',fieldLabel: _('siginvest_id'),name: 'id',disabled: true,readOnly: true,   allowBlank:false, id: 'siginvest-'+this.ident+'-id',anchor: '100%'}
-                    ,{xtype: 'numberfield',fieldLabel: _('siginvest_project_id'),name: 'project_id',disabled: true,readOnly: true,   allowBlank:false, id: 'siginvest-'+this.ident+'-project_id',anchor: '100%',hidden: true}
+                    {xtype: 'textfield',fieldLabel: _('siginvest_project_name'), name: 'name',readOnly: true,    allowBlank:false,       id: 'siginvest-'+this.ident+'-name',anchor: '100%'}
+        //            ,{xtype: 'numberfield',fieldLabel: _('siginvest_id'),        name: 'id',disabled: true,readOnly: true,   allowBlank:false,          id: 'siginvest-'+this.ident+'-id',anchor: '100%',hidden: true}
+
+                    ,{xtype: 'numberfield',fieldLabel: _('siginvest_id'),        name: 'id',   allowBlank:false,          id: 'siginvest-'+this.ident+'-id',anchor: '100%',hidden: true}
+
+                    ,{xtype: 'numberfield',fieldLabel: _('siginvest_project_id'),name: 'project_id',readOnly: true,   allowBlank:false,  id: 'siginvest-'+this.ident+'-project_id',anchor: '100%'}
+                    ,{xtype: 'numberfield',fieldLabel: _('siginvest_project_partner_id'),name: 'partner_id',disabled: true,readOnly: true,allowBlank:false, id: 'siginvest-'+this.ident+'-project_partner_id',anchor: '100%'}
                     ,{
                     layout:'column'
                     ,border: false

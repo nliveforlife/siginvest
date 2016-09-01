@@ -6,5 +6,6 @@ $xpdo_meta_map = array (
     0 => 'siginvestProject',
     1 => 'sigInvestor',
     2 => 'sigPartner',
+    3 => 'sigDevidends',
   ),
 );
