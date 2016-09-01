@@ -29,6 +29,16 @@ class siginvestProjectItemCreateProcessor extends modObjectCreateProcessor {
 			}
 		}
 
+		/*
+			we check if project_id exist^
+		*/
+		$project_id = $this->getProperty('project_id');
+		global $modx;
+		if (!$modx->getObject('modResource', $project_id)) {
+			$this->addFieldError('project_id', $this->modx->lexicon('siginvest_project_err_pr_not_exist'));
+		}
+		// End of check
+
 		$published = $this->getProperty('published');
 		$this->setProperty('published', !empty($published) && $published != 'false');
 
@@ -38,6 +48,37 @@ class siginvestProjectItemCreateProcessor extends modObjectCreateProcessor {
 
 		return parent::beforeSet();
 	}
+
+	/**
+	 * @return boolean
+	 */
+	public function afterSave() {
+		global $modx;
+		$newPartner = $modx->newObject("sigPartner", array(
+			'user_id' => $this->getProperty('partner_id')
+			,'partner_project_id' => $this->getProperty('project_id')
+			,
+			));
+		$newPartner->save();
+
+		/*		 * We set the price to minishop2 product (our project)
+		  */
+		$part_price = $this->getProperty('part_price');
+		$modx->log(modX::LOG_LEVEL_ERROR, 'Part_Price: ' . $part_price);
+		$modx->log(modX::LOG_LEVEL_ERROR, $part_price);
+
+		$project_id = $this->getProperty('project_id');
+		$msProduct =  $modx->getObject('msProduct', $project_id);
+		$price = $msProduct->getProperty('price');
+		$modx->log(modX::LOG_LEVEL_ERROR, 'msProduct_Price: ' . $price);
+		$modx->log(modX::LOG_LEVEL_ERROR, $price);
+
+
+		// End of  set price
+
+		return true; }
+
+
 
 }
 

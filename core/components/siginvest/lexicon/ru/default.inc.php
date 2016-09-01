@@ -67,6 +67,7 @@ $_lang['siginvest_project_err_ns'] = 'Проект не указан.';
 
 $_lang['siginvest_project_err_remove'] = 'Ошибка при удалении Проекта.';
 $_lang['siginvest_project_err_save'] = 'Ошибка при сохранении Проекта.';
+$_lang['siginvest_project_err_pr_not_exist'] = 'Нет Проекта с таким ID.';
 
 
 

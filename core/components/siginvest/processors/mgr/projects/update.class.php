@@ -58,6 +58,23 @@ class siginvestProjectUpdateProcessor extends modObjectUpdateProcessor {
 		$this->setProperty('dev_buyback', !empty($dev_buyback) && $dev_buyback != 'false');
 
 
+		// Set price to msProduct
+		$part_price = $this->getProperty('current_part_price');
+		$project_id = $this->getProperty('project_id');
+		global $modx;
+		$msProduct =  $modx->getObject('msProduct', $project_id);
+		$price = $msProduct->get('price');
+		$msProduct->set('price', $part_price);
+		$msProduct->save();
+
+	$modx->log(modX::LOG_LEVEL_ERROR, 'Part_Price: ' . $part_price);
+
+	$modx->log(modX::LOG_LEVEL_ERROR, 'msProduct_Price: ' . $price);
+
+
+		// end
+
+
 		return !$this->hasErrors();
 	}
 

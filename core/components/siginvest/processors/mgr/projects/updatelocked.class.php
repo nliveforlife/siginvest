@@ -4,7 +4,7 @@
  * Update an Project
  */
 // class siginvestProjectUpdateProcessor extends modObjectUpdateProcessor {
-class siginvestProjectUpdateProcessor extends modObjectUpdateProcessor {
+class siginvestProjectUpdateLockedProcessor extends modObjectUpdateProcessor {
 	public $objectType = 'siginvestProject';
 	public $classKey = 'siginvestProject';
 	public $languageTopics = array('siginvest');
@@ -66,4 +66,4 @@ class siginvestProjectUpdateProcessor extends modObjectUpdateProcessor {
 
 }
 
-return 'siginvestProjectUpdateProcessor';
+return 'siginvestProjectUpdateLockedProcessor';

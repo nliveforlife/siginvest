@@ -381,7 +381,7 @@ siginvest.grid.Projects = function(config) {
                     {xtype: 'textfield',fieldLabel: _('siginvest_project_name'),name: 'name',allowBlank:false, id: 'siginvest-'+this.ident+'-name',anchor: '100%'}
                     ,{xtype: 'numberfield',fieldLabel: _('siginvest_id'),name: 'id',allowBlank:false, id: 'siginvest-'+this.ident+'-id',anchor: '100%', hidden: true}
                     ,{xtype: 'numberfield',fieldLabel: _('siginvest_project_id'),name: 'project_id',allowBlank:false, id: 'siginvest-'+this.ident+'-project_id',anchor: '100%'}
-                    ,{xtype: 'numberfield',fieldLabel: _('siginvest_project_partner_id'),name: 'partner_id',allowBlank:false, id: 'siginvest-'+this.ident+'-project_partner_id',anchor: '100%'}
+                    ,{xtype: 'numberfield',fieldLabel: _('siginvest_project_partner_id'),name: 'partner_id',disabled: true,readOnly: true,allowBlank:false, id: 'siginvest-'+this.ident+'-project_partner_id',anchor: '100%'}
                     ,{
                     layout:'column'
                     ,border: false
@@ -452,10 +452,7 @@ siginvest.grid.Projects = function(config) {
             ,fields:
                 [
                     {xtype: 'textfield',fieldLabel: _('siginvest_project_name'), name: 'name',readOnly: true,    allowBlank:false,       id: 'siginvest-'+this.ident+'-name',anchor: '100%'}
-        //            ,{xtype: 'numberfield',fieldLabel: _('siginvest_id'),        name: 'id',disabled: true,readOnly: true,   allowBlank:false,          id: 'siginvest-'+this.ident+'-id',anchor: '100%',hidden: true}
-
                     ,{xtype: 'numberfield',fieldLabel: _('siginvest_id'),        name: 'id',   allowBlank:false,          id: 'siginvest-'+this.ident+'-id',anchor: '100%',hidden: true}
-
                     ,{xtype: 'numberfield',fieldLabel: _('siginvest_project_id'),name: 'project_id',readOnly: true,   allowBlank:false,  id: 'siginvest-'+this.ident+'-project_id',anchor: '100%'}
                     ,{xtype: 'numberfield',fieldLabel: _('siginvest_project_partner_id'),name: 'partner_id',disabled: true,readOnly: true,allowBlank:false, id: 'siginvest-'+this.ident+'-project_partner_id',anchor: '100%'}
                     ,{
