@@ -7,6 +7,10 @@ $tmp = array(
 		'file' => 'siginvest',
 		'description' => '',
 	),
+	'sigProjectData' => array (
+		'file' => 'siginvestprojectdata',
+		'description' => 'My description  here',
+	),
 );
 
 foreach ($tmp as $k => $v) {

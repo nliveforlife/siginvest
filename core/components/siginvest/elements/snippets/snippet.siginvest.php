@@ -4,7 +4,7 @@
 if (!$siginvest = $modx->getService('siginvest', 'siginvest', $modx->getOption('siginvest_core_path', null, $modx->getOption('core_path') . 'components/siginvest/') . 'model/siginvest/', $scriptProperties)) {
 	return 'Could not load siginvest class!';
 }
-
+//Bla-Bla-Bla
 // Do your snippet code here. This demo grabs 5 items from our custom table.
 $tpl = $modx->getOption('tpl', $scriptProperties, 'Item');
 $sortby = $modx->getOption('sortby', $scriptProperties, 'name');
