@@ -8,7 +8,7 @@ siginvest.grid.Projects = function(config) {
             ,baseParams: {
                 action: 'mgr/projects/getlist'
             }
-            ,fields: ['id','project_id','name','status','parts_made','parts_sold','need_to_gather'
+            ,fields: ['id','project_id','name','status','parts_made','parts_left','parts_sold','need_to_gather'
                 ,'project_invrs_count','current_part_price','dev_profit_plan','dev_persent_to_inv',
                 'dev_term','dev_buyback','dev_paid_count','dev_paid_vsego','published','partner_id','actions']
             ,autoHeight: true
@@ -21,6 +21,8 @@ siginvest.grid.Projects = function(config) {
                 ,{header: _('siginvest_project_name'), sortable: true, dataIndex: 'name',width: 50}
                 ,{header: _('siginvest_project_status'), sortable: true, dataIndex: 'status',width: 30}
                 ,{header: _('siginvest_project_parts_made'), sortable: true, dataIndex: 'parts_made',width: 40}
+                ,{header: _('siginvest_project_parts_left'), sortable: true, dataIndex: 'parts_left',width: 40,hidden: true}
+
                 ,{header: _('siginvest_project_parts_sold'), sortable: true, dataIndex: 'parts_sold',width: 40}
                 ,{header: _('siginvest_project_need_to_gather'), sortable: true, dataIndex: 'need_to_gather',width: 40}
                 ,{header: _('siginvest_project_invrs_count'), sortable: true, dataIndex: 'project_invrs_count',width: 30,hidden: true}
@@ -317,15 +319,16 @@ siginvest.grid.Projects = function(config) {
                                 maxValue: 10000,
                                 minValue: 10, step: 10
                             }
-                            ,{xtype: 'combo-boolean',fieldLabel: _('siginvest_project_published'),          name: 'published',allowBlank:false, id: 'siginvest-'+this.ident+'-published',anchor: '50%'}
+                            ,{xtype: 'combo-boolean',fieldLabel: _('siginvest_project_published'),          name: 'published',allowBlank:true, id: 'siginvest-'+this.ident+'-published',anchor: '50%', hidden: true}
                         ]
                     }]
                 }
-                ,{xtype: 'radiogroup',fieldLabel: _('siginvest_project_status'),name: 'status',id: 'siginvest-'+this.ident+'-status',anchor: '100%',columns: 3,vertical: true
+                ,{xtype: 'radiogroup',fieldLabel: _('siginvest_project_status'),name: 'status',id: 'siginvest-'+this.ident+'-status',anchor: '100%',columns: 1,vertical: false
+                    , hidden: true
                     , items: [
-                        {boxLabel: 'На проверке', name: 'rb', inputValue: 'atcheck', checked: true},
-                        {boxLabel: 'Активен', name: 'rb', inputValue: 'active'},
-                        {boxLabel: 'Закрыт', name: 'rb', inputValue: 'closed'}
+                        {boxLabel: 'Без статуса', name: 'rb', inputValue: 'nope', checked: true},
+                        //    {boxLabel: 'Активен', name: 'rb', inputValue: 'active'},
+                      //  {boxLabel: 'Закрыт', name: 'rb', inputValue: 'closed'}
                     ]
                 }
             ]
@@ -381,6 +384,8 @@ siginvest.grid.Projects = function(config) {
                             {xtype: 'numberfield',fieldLabel: _('siginvest_project_parts_made'),         name: 'parts_made',allowBlank:false,        id: 'siginvest-'+this.ident+'-parts_made',anchor: '100%',  value: 1000,
                                 maxValue: 1000000,
                                 minValue: 100}
+                //hidden field
+                             ,{xtype: 'numberfield',fieldLabel: _('siginvest_project_parts_left'),         name: 'parts_left',allowBlank:true,        id: 'siginvest-'+this.ident+'-parts_left',anchor: '100%',  value: 0, hidden: true}
                             ,{xtype: 'numberfield',fieldLabel: _('siginvest_project_need_to_gather'), name: 'need_to_gather',allowBlank:false,id: 'siginvest-'+this.ident+'-need_to_gather'  ,anchor: '100%',maxValue: 10000000,minValue: 100    }
 
 
@@ -390,6 +395,7 @@ siginvest.grid.Projects = function(config) {
                                 minValue: 10, step: 10
                             }
                             ,{xtype: 'combo-boolean',fieldLabel: _('siginvest_project_published'),          name: 'published',hiddenName: 'published',allowBlank:false, id: 'siginvest-'+this.ident+'-published',anchor: '50%'}
+
                         ]
                     }]
                 }

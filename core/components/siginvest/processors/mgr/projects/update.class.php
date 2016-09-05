@@ -55,6 +55,7 @@ class siginvestProjectUpdateProcessor extends modObjectUpdateProcessor {
 		$parts_made = $this->getProperty('parts_made');
 		$need_to_gather = $this->getProperty('need_to_gather');
 		$real_need = $part_price * $parts_made;
+
 		if ($real_need != $need_to_gather) {
 			return $this->modx->lexicon('siginvest_project_err_sum');
 		}
@@ -66,6 +67,13 @@ class siginvestProjectUpdateProcessor extends modObjectUpdateProcessor {
 		$dev_buyback = $this->getProperty('dev_buyback');
 		$this->setProperty('dev_buyback', !empty($dev_buyback) && $dev_buyback != 'false');
 
+		// Set parts_left field
+		$parts_left = $parts_made;
+		if ($this->getProperty('parts_sold') == 0) {
+			$this->setProperty('parts_left', $parts_left);
+		};
+
+		//
 		return !$this->hasErrors();
 	}
 

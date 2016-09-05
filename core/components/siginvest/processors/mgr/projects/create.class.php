@@ -39,8 +39,9 @@ class siginvestProjectCreateProcessor extends modObjectCreateProcessor {
 		}
 		// End of check
 
-		$published = $this->getProperty('published');
-		$this->setProperty('published', !empty($published) && $published != 'false');
+	//	$published = $this->getProperty('published');
+	//	$this->setProperty('published', !empty($published) && $published != 'false');
+		$this->setProperty('published', false);
 
 		$dev_buyback = $this->getProperty('dev_buyback');
 		$this->setProperty('dev_buyback', !empty($dev_buyback) && $dev_buyback != 'false');
@@ -61,16 +62,14 @@ class siginvestProjectCreateProcessor extends modObjectCreateProcessor {
 			));
 		$newPartner->save();
 
-		// Set price to msProduct
+	// Set price to msProduct
 		$part_price = $this->getProperty('current_part_price');
 		$project_id = $this->getProperty('project_id');
-		global $modx;
+	//	global $modx;
 		$msProduct =  $modx->getObject('msProduct', $project_id);
-	//	$price = $msProduct->get('price');
 		$msProduct->set('price', $part_price);
 		$msProduct->save();
-
-		// End of  set price
+	// End of  set price
 
 		return true; }
 

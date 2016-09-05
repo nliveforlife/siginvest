@@ -8,13 +8,12 @@ $xpdo_meta_map['siginvestProject']= array (
   array (
     'project_id' => 0,
     'name' => '',
-    'status' => 'atcheck',
-    'can_sell_parts' => 0,
+    'status' => 'nope',
     'parts_made' => 1000,
     'current_part_price' => 10,
     'need_to_gather' => 10000,
     'parts_sold' => 0,
-    'parts_left' => 10000,
+    'parts_left' => 0,
     'project_invrs_count' => 0,
     'published' => 0,
     'dev_profit_plan' => 0,
@@ -50,16 +49,7 @@ $xpdo_meta_map['siginvestProject']= array (
       'precision' => '30',
       'phptype' => 'string',
       'null' => false,
-      'default' => 'atcheck',
-    ),
-    'can_sell_parts' => 
-    array (
-      'dbtype' => 'tinyint',
-      'precision' => '1',
-      'phptype' => 'boolean',
-      'attributes' => 'unsigned',
-      'null' => true,
-      'default' => 0,
+      'default' => 'nope',
     ),
     'parts_made' => 
     array (
@@ -104,7 +94,7 @@ $xpdo_meta_map['siginvestProject']= array (
       'attributes' => 'unsigned',
       'phptype' => 'integer',
       'null' => true,
-      'default' => 10000,
+      'default' => 0,
     ),
     'project_invrs_count' => 
     array (
