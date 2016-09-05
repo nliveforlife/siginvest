@@ -326,10 +326,8 @@ siginvest.grid.Projects = function(config) {
                 ,{xtype: 'radiogroup',fieldLabel: _('siginvest_project_status'),name: 'status',id: 'siginvest-'+this.ident+'-status',anchor: '100%',columns: 1,vertical: false
                     , hidden: true
                     , items: [
-                        {boxLabel: 'Без статуса', name: 'rb', inputValue: 'nope', checked: true},
-                        //    {boxLabel: 'Активен', name: 'rb', inputValue: 'active'},
-                      //  {boxLabel: 'Закрыт', name: 'rb', inputValue: 'closed'}
-                    ]
+                        {boxLabel: 'Без статуса', name: 'rb', inputValue: 'nope', checked: true}
+                     ]
                 }
             ]
             ,keys: [{key: Ext.EventObject.ENTER,shift: true,fn: function() {this.submit() },scope: this}]
@@ -399,11 +397,12 @@ siginvest.grid.Projects = function(config) {
                         ]
                     }]
                 }
-                    ,{xtype: 'radiogroup',fieldLabel: _('siginvest_project_status'),name: 'status',id: 'siginvest-'+this.ident+'-status',anchor: '100%',columns: 3,vertical: true
+                    ,{xtype: 'radiogroup',fieldLabel: _('siginvest_project_status'),name: 'status',id: 'siginvest-'+this.ident+'-status',anchor: '100%',columns: 4,vertical: true
                     , items: [
                         {boxLabel: 'На проверке', name: 'status', inputValue: 'atcheck', checked: true},
                         {boxLabel: 'Активен', name: 'status', inputValue: 'active'},
-                        {boxLabel: 'Закрыт', name: 'status', inputValue: 'closed'}
+                        {boxLabel: 'Закрыт', name: 'status', inputValue: 'closed'},
+                        {boxLabel: 'Нет', name: 'status', inputValue: 'nope'}
                     ]
                 }
 
