@@ -7,6 +7,8 @@
 /** @var array $scriptProperties */
 /** @var siginvest $siginvest */
 $scriptProperties = array();
+//
+
 /*
 global $modx;
 if (!$siginvest = $modx->getService('siginvest', 'siginvest', $modx->getOption('siginvest_core_path', null, $modx->getOption('core_path') . 'components/siginvest/') . 'model/siginvest/', $scriptProperties)) {

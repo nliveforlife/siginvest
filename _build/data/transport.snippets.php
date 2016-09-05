@@ -8,7 +8,7 @@ $tmp = array(
 		'description' => '',
 	),
 	'sigProjectData' => array (
-		'file' => 'siginvestprojectdata',
+		'file' => 'sigProjectData',
 		'description' => 'My description  here',
 	),
 );
