@@ -2,15 +2,15 @@
 
 $plugins = array();
 
-$tmp = array(/*
-	'siginvest' => array(
-		'file' => 'siginvest',
+$tmp = array(
+	'siginvestSetParts' => array(
+		'file' => 'siginvestSetParts',
 		'description' => '',
 		'events' => array(
-			'OnManagerPageInit' => array()
+			'msOnChangeOrderStatus' => array()
 		)
 	)
-	*/
+
 );
 
 foreach ($tmp as $k => $v) {

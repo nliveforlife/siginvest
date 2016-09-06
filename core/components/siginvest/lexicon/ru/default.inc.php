@@ -128,3 +128,5 @@ $_lang['siginvest_user_id'] = 'ID';
 $_lang['siginvest_user_email'] = 'E-mail';
 $_lang['siginvest_user_active'] = 'Активный';
 $_lang['siginvest_user_actions'] = 'Действия';
+
+
