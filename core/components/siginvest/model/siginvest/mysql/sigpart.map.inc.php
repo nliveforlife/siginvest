@@ -1,5 +1,5 @@
 <?php
-$xpdo_meta_map['sigParts']= array (
+$xpdo_meta_map['sigPart']= array (
   'package' => 'siginvest',
   'version' => '1.1',
   'table' => 'sig_Parts',
