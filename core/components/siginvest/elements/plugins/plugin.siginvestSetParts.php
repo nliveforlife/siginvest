@@ -77,7 +77,7 @@ switch ($modx->event->name) {
 					$x += 1;
 					$pr_part_id = "prj" . "$pr_id" . "ord" . strval($order_id) . "part". '00' . "$x";
 					//  print_r('Part_id: ');  print_r($pr_part_id);   print_r('<br>');
-					$Sold = $modx->newObject("sigInvestor", array(
+					$Sold = $modx->newObject("sigPart", array(
 						'user_id' => $user_id
 					,'order_id' => $order_id
 					, 'part_id' => $pr_part_id
