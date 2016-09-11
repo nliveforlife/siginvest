@@ -1,18 +1,38 @@
 <?php
-$xpdo_meta_map['sigInvestor']= array (
+$xpdo_meta_map['sigParts']= array (
   'package' => 'siginvest',
   'version' => '1.1',
-  'table' => 'sig_Investors',
+  'table' => 'sig_Parts',
   'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
+    'part_id' => '',
     'user_id' => 0,
+    'order_id' => 0,
     'project_id' => 0,
-    'number_of_parts' => 0,
+    'order_time' => 'CURRENT_TIMESTAMP',
+    'order_status' => '',
   ),
   'fieldMeta' => 
   array (
+    'part_id' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '55',
+      'phptype' => 'string',
+      'null' => true,
+      'default' => '',
+    ),
     'user_id' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'attributes' => 'unsigned',
+      'null' => true,
+      'default' => 0,
+    ),
+    'order_id' => 
     array (
       'dbtype' => 'int',
       'precision' => '10',
@@ -30,14 +50,20 @@ $xpdo_meta_map['sigInvestor']= array (
       'null' => true,
       'default' => 0,
     ),
-    'number_of_parts' => 
+    'order_time' => 
     array (
-      'dbtype' => 'int',
-      'precision' => '10',
-      'phptype' => 'integer',
-      'attributes' => 'unsigned',
+      'dbtype' => 'timestamp',
+      'phptype' => 'timestamp',
+      'null' => false,
+      'default' => 'CURRENT_TIMESTAMP',
+    ),
+    'order_status' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '255',
+      'phptype' => 'string',
       'null' => true,
-      'default' => 0,
+      'default' => '',
     ),
   ),
   'indexes' => 
