@@ -39,13 +39,10 @@ switch ($modx->event->name) {
 			$q1->stmt->bindColumn(5, $value_ofparts);
 			// пишем выборку в массив:
 			while ($q1->stmt->fetch(PDO::FETCH_BOUND)) {
-
 				//Проверяем что ордер это не пополнение внутреннего счета
-				if ($projectid_inOrder == 0) {
-//				$modx->log(modX::LOG_LEVEL_INFO, 'Project_ID_in_Order:' . $projectid_inOrder );
-					return;
-				}
-				$data[$projectid_inOrder] = $value_ofparts;  }
+				if ($projectid_inOrder == 0) { 	return; }
+				$data[$projectid_inOrder] = $value_ofparts;
+			}
 
 			foreach ($data as $pr_id => $value) {
 //            print_r($pr_id); print_r('='); print_r($value);   print_r('<br>');
@@ -72,7 +69,7 @@ switch ($modx->event->name) {
 				$q3->stmt->execute();
 				//  }
 				// конец записи в таблицу проектов
-				// пишем в таблицу sig_Investors
+				// пишем в таблицу sig_Parts
 				while ($value > $x) {
 					$x += 1;
 					$pr_part_id = "prj" . "$pr_id" . "ord" . strval($order_id) . "part". '00' . "$x";
@@ -87,7 +84,68 @@ switch ($modx->event->name) {
 				};
 				$x = 0;
 			}
-			// конец записи в таблицу sig_Investors
+			// конец записи в таблицу sig_Parts
+
+			//Начало записи в таблицу sig_Investors
+			foreach ($data as $pr_id => $value) {
+				$q31 = $modx->newQuery('sigInvestor');
+				$q31->where(array('project_id' => $pr_id));
+				$q31->where(array('user_id' => $user_id), xPDOQuery::SQL_AND);
+				$q31->select(array('sigInvestor.*'));
+				$q31->prepare();
+				$q31->stmt->execute();
+				$result = $q31->stmt->fetchAll(PDO::FETCH_ASSOC);
+				// если такая запись не найдена - то создаем новую
+				if(empty($result)) {
+					$newinvestor = $modx->newObject("sigInvestor", array(
+						'user_id' => $user_id
+					,'project_id' => $pr_id
+					, 'number_of_parts' => $value,));
+					$newinvestor->save();
+				} else {
+					//если запись найдена - то прибавляем количество новокупленных частей к старым
+					$newvalue = $result[0]['number_of_parts'] + $value;
+					$q33 = $modx->newQuery('sigInvestor');
+					$q33->command('update');
+					$q33->where(array('project_id' => $pr_id));
+					$q33->where(array('user_id' => $user_id), xPDOQuery::SQL_AND);
+					$q33->set(array('number_of_parts' => $newvalue));
+					$q33->prepare();
+					$q33->stmt->execute();
+
+//					print_r('Количество старых частей:'); print_r($result[0]); print_r('<br>');
+//					print_r('NewValue:' . $newvalue); print_r('<br>');
+				}
+			}
+			// конец записи в sig_Investors
+
+
+			//Начало подсчета количества инвесторов
+			foreach ($data as $pr_id => $value) {
+				$q4 = $modx->newQuery('sigInvestor');
+				$q4->where(array('project_id' => $pr_id));
+				$q4->select(array('sigInvestor.user_id'));
+				$q4->prepare();
+				$q4->stmt->execute();
+				$result = $q4->stmt->fetchAll(PDO::FETCH_ASSOC);
+				$invcount = count($result);
+				// записываем количество инвесторов в талицу sig_projects
+				$q41 = $modx->newQuery('siginvestProject');
+				$q41->command('update');
+				$q41->where(array('project_id' => $pr_id));
+				$q41->set(array('project_invrs_count' => $invcount));
+				$q41->prepare();
+				$q41->stmt->execute();
+
+			/*
+				print_r('==========================');print_r('<br>');
+				print_r('Ай-ди преокта:' . $pr_id); print_r('<br>');
+				print_r('Result:'); print_r($result); print_r('<br>');
+				print_r('Количество инвесторов преокта:'); print_r(count($result)); print_r('<br>');
+			*/
+			}
+			//конец подсчета количества инвесторов.
+
 		}
 
 		/** @var modUser $user */
