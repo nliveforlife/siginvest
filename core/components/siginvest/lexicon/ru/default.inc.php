@@ -82,10 +82,7 @@ $_lang['siginvest_payout_created_time'] = 'Создано';
 $_lang['siginvest_payout_paid_time'] = 'Дата выплаты';
 $_lang['siginvest_payout_status'] = 'Статус';
 $_lang['siginvest_payout_'] = '';
-$_lang[''] = '';
-$_lang[''] = '';
-$_lang[''] = '';
-$_lang[''] = '';
+
 
 $_lang['siginvest_investors'] = 'Инвесторы';
 $_lang['siginvest_partners'] = 'Партнеры';
@@ -93,11 +90,20 @@ $_lang['siginvest_partners'] = 'Партнеры';
 $_lang['siginvest_dividends'] = 'Дивиденды';
 $_lang['siginvest_dividend_btn_create'] = 'Создать Выплату дивидендов';
 $_lang['siginvest_dividend_id'] = 'Id';
-$_lang['siginvest_dividend_name'] = 'Название';
+$_lang['siginvest_dividend_name'] = 'Название проекта';
+$_lang['siginvest_dividend_dev_paid'] = 'Всего к выплате, $';
+$_lang['siginvest_dividend_dev_paid_per_part'] = 'Начислено на 1 долю, $';
+$_lang['siginvest_dividend_dev_paid_number'] = '№ Этапа';
+$_lang['siginvest_dividend_dev_paid_date'] = 'Дата начисления';
+$_lang['siginvest_dividend_partner_owner_id'] = 'ID партнера';
+$_lang['siginvest_dividend_project_id'] = 'ID проекта';
+$_lang['siginvest_dividend_update'] = 'Изменить';
+$_lang['siginvest_dividend_remove'] = 'Удалить';
+
+
 $_lang['siginvest_dividend_description'] = 'Описание';
 $_lang['siginvest_dividend_active'] = 'Активно';
 $_lang['siginvest_dividend_create'] = 'Создать дививенд';
-$_lang['siginvest_dividend_update'] = 'Изменить дививенд';
 $_lang['siginvest_dividend_enable'] = 'Включить дививенд';
 $_lang['siginvest_dividends_enable'] = 'Включить дививенды';
 $_lang['siginvest_dividend_disable'] = 'Отключить дививенд';

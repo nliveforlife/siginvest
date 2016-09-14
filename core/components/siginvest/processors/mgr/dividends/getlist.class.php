@@ -1,15 +1,15 @@
 <?php
 
 /**
- * Get a list of Items
+ * Get a list of Devidends
  */
-class siginvestItemGetListProcessor extends modObjectGetListProcessor {
-	public $objectType = 'siginvestProject';
-	public $classKey = 'siginvestProject';
+class siginvestsigDevidendsGetListProcessor extends modObjectGetListProcessor {
+	public $objectType = 'sigDevidends';
+	public $classKey = 'sigDevidends';
 	public $defaultSortField = 'id';
 	public $defaultSortDirection = 'DESC';
 	//public $permission = 'list';
-
+	public $renderers = '';
 
 	/**
 	 * * We doing special check of permission
@@ -57,20 +57,23 @@ class siginvestItemGetListProcessor extends modObjectGetListProcessor {
 		$array['actions'][] = array(
 			'cls' => '',
 			'icon' => 'icon icon-edit',
-			'title' => $this->modx->lexicon('siginvest_item_update'),
+		//	'title' => $this->modx->lexicon('siginvest_dividend_update'),
+			'title' => 'siginvest_dividend_update',
 			//'multiple' => $this->modx->lexicon('siginvest_items_update'),
-			'action' => 'updateItem',
+			// 'action' => 'updateDividend',
+			'action' => 'updateDividend',
 			'button' => true,
 			'menu' => true,
+			'type' => 'updateDividend'
 		);
 
-		if (!$array['active']) {
+/*		if (!$array['active']) {
 			$array['actions'][] = array(
 				'cls' => '',
 				'icon' => 'icon icon-power-off action-green',
 				'title' => $this->modx->lexicon('siginvest_item_enable'),
 				'multiple' => $this->modx->lexicon('siginvest_items_enable'),
-				'action' => 'enableItem',
+				'action' => 'enableDividend',
 				'button' => true,
 				'menu' => true,
 			);
@@ -81,19 +84,19 @@ class siginvestItemGetListProcessor extends modObjectGetListProcessor {
 				'icon' => 'icon icon-power-off action-gray',
 				'title' => $this->modx->lexicon('siginvest_item_disable'),
 				'multiple' => $this->modx->lexicon('siginvest_items_disable'),
-				'action' => 'disableItem',
+				'action' => 'disableDividend',
 				'button' => true,
 				'menu' => true,
 			);
 		}
-
+*/
 		// Remove
 		$array['actions'][] = array(
 			'cls' => '',
 			'icon' => 'icon icon-trash-o action-red',
-			'title' => $this->modx->lexicon('siginvest_item_remove'),
-			'multiple' => $this->modx->lexicon('siginvest_items_remove'),
-			'action' => 'removeItem',
+			'title' => $this->modx->lexicon('siginvest_dividend_remove'),
+			'multiple' => $this->modx->lexicon('siginvest_dividend_remove'),
+			'action' => 'removeDividend',
 			'button' => true,
 			'menu' => true,
 		);
@@ -103,4 +106,4 @@ class siginvestItemGetListProcessor extends modObjectGetListProcessor {
 
 }
 
-return 'siginvestItemGetListProcessor';
+return 'siginvestsigDevidendsGetListProcessor';

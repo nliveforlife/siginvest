@@ -59,7 +59,7 @@ class siginvestProjectGetListProcessor extends modObjectGetListProcessor {
 			'cls' => '',
 			'class' => '',
 			'icon' => 'icon icon-edit',
-			'title' => $this->modx->lexicon('siginvest_project_updateProject'),
+		//	'title' => $this->modx->lexicon('siginvest_project_updateProject'),
 			//'multiple' => $this->modx->lexicon('siginvest_items_updateProject'),
 			'action' => 'updateProject',
 			'button' => true,

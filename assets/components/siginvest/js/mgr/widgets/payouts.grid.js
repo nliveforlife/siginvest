@@ -58,32 +58,32 @@ Ext.extend(siginvest.grid.Payouts, MODx.grid.Grid, {
             header: _('id'),
             dataIndex: 'id',
             sortable: true,
-            width: 70
+            width: 20
         }, {
             header: _('siginvest_payout_user_id'),
             dataIndex: 'user_id',
             sortable: true,
-            width: 200,
+            width: 40,
         }, {
             header: _('siginvest_payout_pay_amount'),
             dataIndex: 'pay_amount',
             sortable: false,
-            width: 250,
+            width: 45,
         }, {
             header: _('siginvest_payout_sig_commission_value'),
             dataIndex: 'sig_commission_value',
             sortable: false,
-            width: 250,
+            width: 45,
         }, {
             header: _('siginvest_payout_created_time'),
             dataIndex: 'created_time',
             sortable: false,
-            width: 250,
+            width: 90,
         }, {
             header: _('siginvest_payout_paid_time'),
             dataIndex: 'paid_time',
             sortable: false,
-            width: 250,
+            width: 90,
         }, {
             header: _('siginvest_payout_status'),
             dataIndex: 'status',
