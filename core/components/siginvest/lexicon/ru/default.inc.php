@@ -9,6 +9,7 @@ $_lang['siginvest_intro_investors'] = 'Список всех инвесторо�
 $_lang['siginvest_intro_partners'] = 'Список всех партнеров.';
 $_lang['siginvest_intro_projects'] = 'Список всех проектов.';
 $_lang['siginvest_intro_dividends'] = 'Список всех дивидендов.';
+$_lang['siginvest_intro_payouts'] = 'Список запросов на вывод средств.';
 
 $_lang['siginvest_items'] = 'Предметы';
 
@@ -71,8 +72,20 @@ $_lang['siginvest_project_err_remove'] = 'Ошибка при удалении �
 $_lang['siginvest_project_err_save'] = 'Ошибка при сохранении Проекта.';
 $_lang['siginvest_project_err_pr_not_exist'] = 'Нет Проекта с таким ID.';
 
-
-
+$_lang['siginvest_payouts'] = 'Выплаты';
+$_lang['siginvest_payout_update'] = 'Изменить';
+$_lang['siginvest_payout_remove'] = 'Удалить';
+$_lang['siginvest_payout_user_id'] = 'User ID';
+$_lang['siginvest_payout_pay_amount'] = 'Сумма';
+$_lang['siginvest_payout_sig_commission_value'] = 'Комиссия';
+$_lang['siginvest_payout_created_time'] = 'Создано';
+$_lang['siginvest_payout_paid_time'] = 'Дата выплаты';
+$_lang['siginvest_payout_status'] = 'Статус';
+$_lang['siginvest_payout_'] = '';
+$_lang[''] = '';
+$_lang[''] = '';
+$_lang[''] = '';
+$_lang[''] = '';
 
 $_lang['siginvest_investors'] = 'Инвесторы';
 $_lang['siginvest_partners'] = 'Партнеры';

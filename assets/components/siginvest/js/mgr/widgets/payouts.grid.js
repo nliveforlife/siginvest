@@ -1,7 +1,7 @@
-siginvest.grid.Investors = function (config) {
+siginvest.grid.Payouts = function (config) {
     config = config || {};
     if (!config.id) {
-        config.id = 'siginvest-grid-investors';
+        config.id = 'siginvest-grid-payouts';
     }
     Ext.applyIf(config, {
         url: siginvest.config.connector_url,
@@ -10,7 +10,7 @@ siginvest.grid.Investors = function (config) {
      //   tbar: this.getTopBar(config),
         sm: new Ext.grid.CheckboxSelectionModel(),
         baseParams: {
-            action: 'mgr/investors/getlist'
+            action: 'mgr/payouts/getlist'
         },
         listeners: {
             rowDblClick: function (grid, rowIndex, e) {
@@ -34,7 +34,7 @@ siginvest.grid.Investors = function (config) {
         remoteSort: true,
         autoHeight: true,
     });
-    siginvest.grid.Investors.superclass.constructor.call(this, config);
+    siginvest.grid.Payouts.superclass.constructor.call(this, config);
 
     // Clear selection on grid refresh
     /*
@@ -47,32 +47,46 @@ siginvest.grid.Investors = function (config) {
 
 };
 
-Ext.extend(siginvest.grid.Investors, MODx.grid.Grid, {
+Ext.extend(siginvest.grid.Payouts, MODx.grid.Grid, {
     windows: {},
     getFields: function (config) {
-        return ['id', 'username', 'E-mail', 'active', 'actions'];
+        return ['id', 'user_id', 'pay_amount', 'sig_commission_value','created_time','paid_time','status', 'actions'];
     },
 
     getColumns: function (config) {
         return [{
-            header: _('siginvest_user_id'),
+            header: _('id'),
             dataIndex: 'id',
             sortable: true,
             width: 70
         }, {
-            header: _('siginvest_username'),
-            dataIndex: 'username',
+            header: _('siginvest_payout_user_id'),
+            dataIndex: 'user_id',
             sortable: true,
             width: 200,
         }, {
-            header: _('siginvest_user_email'),
-            dataIndex: 'E-mail',
+            header: _('siginvest_payout_pay_amount'),
+            dataIndex: 'pay_amount',
             sortable: false,
             width: 250,
         }, {
-            header: _('siginvest_user_active'),
-            dataIndex: 'active',
-            renderer: siginvest.utils.renderBoolean,
+            header: _('siginvest_payout_sig_commission_value'),
+            dataIndex: 'sig_commission_value',
+            sortable: false,
+            width: 250,
+        }, {
+            header: _('siginvest_payout_created_time'),
+            dataIndex: 'created_time',
+            sortable: false,
+            width: 250,
+        }, {
+            header: _('siginvest_payout_paid_time'),
+            dataIndex: 'paid_time',
+            sortable: false,
+            width: 250,
+        }, {
+            header: _('siginvest_payout_status'),
+            dataIndex: 'status',
             sortable: true,
             width: 100,
         }, {
@@ -85,4 +99,4 @@ Ext.extend(siginvest.grid.Investors, MODx.grid.Grid, {
         }];
     }
 });
-Ext.reg('siginvest-grid-investors', siginvest.grid.Investors);
+Ext.reg('siginvest-grid-payouts', siginvest.grid.Payouts);

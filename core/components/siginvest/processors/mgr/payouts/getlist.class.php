@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Get a list of Items
+ * Get a list of Payouts
  */
-class siginvestItemGetListProcessor extends modObjectGetListProcessor {
-	public $objectType = 'siginvestProject';
-	public $classKey = 'siginvestProject';
+class siginvestPayoutGetListProcessor extends modObjectGetListProcessor {
+	public $objectType = 'sigPayout';
+	public $classKey = 'sigPayout';
 	public $defaultSortField = 'id';
 	public $defaultSortDirection = 'DESC';
 	//public $permission = 'list';
@@ -57,20 +57,20 @@ class siginvestItemGetListProcessor extends modObjectGetListProcessor {
 		$array['actions'][] = array(
 			'cls' => '',
 			'icon' => 'icon icon-edit',
-			'title' => $this->modx->lexicon('siginvest_item_update'),
-			//'multiple' => $this->modx->lexicon('siginvest_items_update'),
-			'action' => 'updateItem',
+			'title' => $this->modx->lexicon('siginvest_payout_update'),
+			//'multiple' => $this->modx->lexicon('siginvest_payouts_update'),
+			'action' => 'updatePayout',
 			'button' => true,
 			'menu' => true,
 		);
-
+/*
 		if (!$array['active']) {
 			$array['actions'][] = array(
 				'cls' => '',
 				'icon' => 'icon icon-power-off action-green',
-				'title' => $this->modx->lexicon('siginvest_item_enable'),
-				'multiple' => $this->modx->lexicon('siginvest_items_enable'),
-				'action' => 'enableItem',
+				'title' => $this->modx->lexicon('siginvest_payout_enable'),
+				'multiple' => $this->modx->lexicon('siginvest_payouts_enable'),
+				'action' => 'enablePayout',
 				'button' => true,
 				'menu' => true,
 			);
@@ -79,21 +79,21 @@ class siginvestItemGetListProcessor extends modObjectGetListProcessor {
 			$array['actions'][] = array(
 				'cls' => '',
 				'icon' => 'icon icon-power-off action-gray',
-				'title' => $this->modx->lexicon('siginvest_item_disable'),
-				'multiple' => $this->modx->lexicon('siginvest_items_disable'),
-				'action' => 'disableItem',
+				'title' => $this->modx->lexicon('siginvest_payout_disable'),
+				'multiple' => $this->modx->lexicon('siginvest_payouts_disable'),
+				'action' => 'disablePayout',
 				'button' => true,
 				'menu' => true,
 			);
 		}
-
+*/
 		// Remove
 		$array['actions'][] = array(
 			'cls' => '',
 			'icon' => 'icon icon-trash-o action-red',
-			'title' => $this->modx->lexicon('siginvest_item_remove'),
-			'multiple' => $this->modx->lexicon('siginvest_items_remove'),
-			'action' => 'removeItem',
+			'title' => $this->modx->lexicon('siginvest_payout_remove'),
+			'multiple' => $this->modx->lexicon('siginvest_payouts_remove'),
+			'action' => 'removePayout',
 			'button' => true,
 			'menu' => true,
 		);
@@ -103,4 +103,4 @@ class siginvestItemGetListProcessor extends modObjectGetListProcessor {
 
 }
 
-return 'siginvestItemGetListProcessor';
+return 'siginvestPayoutGetListProcessor';

@@ -47,18 +47,20 @@ siginvest.panel.Home = function (config) {
 				}]
 			},
 				{
-					title: _('siginvest_investors'),
+					title: _('siginvest_payouts'),
 					layout: 'anchor',
 					items: [{
-						html: _('siginvest_intro_investors'),
+						html: _('siginvest_intro_payouts'),
 						cls: 'panel-desc',
                         bodyCssClass: 'panel-desc'
 					}, {
-						xtype: 'siginvest-grid-investors',
+						xtype: 'siginvest-grid-payouts',
 						cls: 'main-wrapper',
                         preventRender: true
 					}]
 				},
+
+				/*
                 {
                     title: _('siginvest_partners'),
                     layout: 'anchor',
@@ -71,7 +73,7 @@ siginvest.panel.Home = function (config) {
                         cls: 'main-wrapper',
                         preventRender: true
                     }]
-                },
+                },  */
                 {
                     title: _('siginvest_dividends'),
                     layout: 'anchor',
